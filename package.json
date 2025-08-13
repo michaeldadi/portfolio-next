@@ -9,7 +9,9 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "vercel:env-pull:dev": "npx vercel env pull --environment preview .env.local",
+    "vercel:env-pull:prod": "npx vercel env pull --environment production .env.local"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.48.4",
