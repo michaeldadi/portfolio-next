@@ -1,16 +1,16 @@
 import type { Config } from 'prettier';
 
-const config: Config = {
+const prettierConfig: Config = {
+  plugins: ['prettier-plugin-tailwindcss'],
   semi: true,
   singleQuote: true,
-  tabWidth: 2,
   trailingComma: 'es5',
-  printWidth: 80,
-  endOfLine: 'lf',
+  printWidth: 100,
+  endOfLine: 'auto',
   bracketSpacing: true,
   arrowParens: 'avoid',
   jsxSingleQuote: true,
   bracketSameLine: false,
 };
 
-export default config;
+export default prettierConfig;
