@@ -3982,6 +3982,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10/d5f6e9de5bbc52310f786099e18609289ed5e30af60a71e0646784c8185ddd1d0eebcf7c96b7faaaefc4a8366f3a3a4244d099b6d0866ee2bec80d1361e64342
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.4.0, debug@npm:^4.4.1":
   version: 4.4.1
   resolution: "debug@npm:4.4.1"
@@ -7460,6 +7467,7 @@ __metadata:
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
     "@vercel/analytics": "npm:^1.5.0"
+    date-fns: "npm:^4.1.0"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.4.6"
     husky: "npm:^9.1.7"
@@ -7473,6 +7481,7 @@ __metadata:
     tsx: "npm:^4.20.4"
     typescript: "npm:^5"
     vercel: "npm:^44.7.3"
+    zod: "npm:^4.0.17"
   languageName: unknown
   linkType: soft
 
@@ -9518,5 +9527,12 @@ __metadata:
   version: 1.2.1
   resolution: "yocto-queue@npm:1.2.1"
   checksum: 10/0843d6c2c0558e5c06e98edf9c17942f25c769e21b519303a5c2adefd5b738c9b2054204dc856ac0cd9d134b1bc27d928ce84fd23c9e2423b7e013d5a6f50577
+  languageName: node
+  linkType: hard
+
+"zod@npm:^4.0.17":
+  version: 4.0.17
+  resolution: "zod@npm:4.0.17"
+  checksum: 10/bfdb7f1a7a3dd17e83c6720f9f763d522d4914962c81844fe408512e55df11378c6032d48dea4ec6ca6a260bdd9e92c59ec75bd40cb49f4c12115366744f2def
   languageName: node
   linkType: hard
