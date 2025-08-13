@@ -1,6 +1,11 @@
 import { PopupButton } from 'react-calendly';
 
 export const CalendlyButton = ({ text = 'Schedule a Call', className = '' }) => {
+  if (typeof window === 'undefined') {
+    // Prevents server-side rendering issues with Calendly
+    return null;
+  }
+
   return (
     <PopupButton
       url='https://calendly.com/michaeldadi-pm/30min'

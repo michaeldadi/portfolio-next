@@ -4051,6 +4051,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
+  languageName: node
+  linkType: hard
+
 "code-block-writer@npm:^10.1.1":
   version: 10.1.1
   resolution: "code-block-writer@npm:10.1.1"
@@ -6766,6 +6773,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.12.11":
+  version: 1.12.11
+  resolution: "libphonenumber-js@npm:1.12.11"
+  checksum: 10/805d157330ee8d011c4fc1b411f926cdafa01258b628a1e648a847563ce198285bb7291d1e083e6cd829287faecc4f8bc6e5a92e1290076565ad78ae2a9eda5d
+  languageName: node
+  linkType: hard
+
 "lie@npm:^3.0.2":
   version: 3.3.0
   resolution: "lie@npm:3.3.0"
@@ -8066,10 +8080,12 @@ __metadata:
     "@types/react-dom": "npm:^19"
     "@vercel/analytics": "npm:^1.5.0"
     axios: "npm:^1.11.0"
+    clsx: "npm:^2.1.1"
     date-fns: "npm:^4.1.0"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.4.6"
     husky: "npm:^9.1.7"
+    libphonenumber-js: "npm:^1.12.11"
     lint-staged: "npm:^16.1.5"
     lottie-react: "npm:^2.4.1"
     lucide-react: "npm:^0.539.0"
@@ -8086,6 +8102,7 @@ __metadata:
     react-parallax: "npm:^3.5.2"
     resend: "npm:^6.0.1"
     sonner: "npm:^2.0.7"
+    tailwind-merge: "npm:^3.3.1"
     tailwindcss: "npm:^4"
     tsx: "npm:^4.20.4"
     typescript: "npm:^5"
@@ -9401,6 +9418,13 @@ __metadata:
   peerDependencies:
     react: ">=17.0"
   checksum: 10/45a8bde7fb4192d8fe5504ebbad4206381d4312257a873179278f8ec8b713e58a30053fa03fd52f4281ee2ad3eb96608fc70d6189d28f6c5f9c563d67ca22903
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "tailwind-merge@npm:3.3.1"
+  checksum: 10/ad97f0763afdfdce785b8de50bc546951bb3cc803ab4f809cb10d654d9b7e28b0d19dead70ab9070edf479af68622a5f6ba16a21584fa8c21236855709dc648f
   languageName: node
   linkType: hard
 
