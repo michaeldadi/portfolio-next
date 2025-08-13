@@ -7453,9 +7453,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"portfolio@workspace:.":
+"portfolio-next@workspace:.":
   version: 0.0.0-use.local
-  resolution: "portfolio@workspace:."
+  resolution: "portfolio-next@workspace:."
   dependencies:
     "@commitlint/cli": "npm:^19.8.1"
     "@commitlint/config-conventional": "npm:^19.8.1"
