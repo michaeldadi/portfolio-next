@@ -14,7 +14,7 @@ const CalendlyPopupButton = ({ text = 'Schedule a Call', className = '' }: Calen
       url='https://calendly.com/michaeldadi-pm/30min'
       rootElement={document.body}
       text={text}
-      className={`rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 font-semibold text-white transition-transform hover:scale-105 ${className}`}
+      className={`cursor-pointer rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 font-semibold text-white transition-transform hover:scale-105 ${className}`}
     />
   );
 };
