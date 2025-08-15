@@ -6,33 +6,11 @@ export const GITHUB_API = 'https://api.github.com';
 
 // API Endpoints
 export const endpoints = {
-  // Contact
-  contact: {
-    send: '/contact',
-    subscribe: '/contact/subscribe',
-  },
-
-  // Projects
-  projects: {
-    list: '/projects',
-    get: (id: string) => `/projects/${id}`,
-    create: '/projects',
-    update: (id: string) => `/projects/${id}`,
-    delete: (id: string) => `/projects/${id}`,
-  },
-
   // Analytics
   analytics: {
     track: '/analytics/track',
     pageView: '/analytics/page-view',
     projectView: (id: string) => `/analytics/project/${id}/view`,
-  },
-
-  // Blog (if you add one)
-  blog: {
-    list: '/blog/posts',
-    get: (slug: string) => `/blog/posts/${slug}`,
-    related: (slug: string) => `/blog/posts/${slug}/related`,
   },
 
   // External APIs
