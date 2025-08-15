@@ -24,7 +24,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className='mb-6 text-5xl font-bold md:text-7xl'>
+          <h1 className='mb-6 text-5xl font-bold text-white md:text-7xl'>
             Hi, I&#39;m{' '}
             <span className='bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent'>
               {personalInfo.name}
@@ -40,7 +40,7 @@ const Hero = () => {
             <CalendlyButton text='Schedule a Call' />
             <a
               href='#projects'
-              className='rounded-lg border border-gray-600 px-8 py-3 font-semibold transition hover:bg-gray-800'
+              className='rounded-lg border border-gray-600 px-8 py-3 font-semibold text-white transition hover:bg-gray-800'
             >
               View My Work
             </a>

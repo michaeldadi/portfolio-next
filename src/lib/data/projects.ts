@@ -2,9 +2,10 @@ import type { Project } from '@/lib/types';
 
 export const projects: Project[] = [
   {
-    id: 'social-media-app',
-    title: 'Social Media App',
-    description: 'React Native app with real-time messaging, stories, and social features.',
+    id: 'neon-expo-app',
+    title: 'Neon',
+    description:
+      'React Native app with voice calling, real-time audio transcription, and AI features.',
     longDescription: `A comprehensive social media platform built with React Native and Expo, 
                       featuring real-time messaging, ephemeral stories, and advanced social networking 
                       capabilities. Implemented custom animations and optimized performance for smooth 
@@ -19,8 +20,8 @@ export const projects: Project[] = [
       '/images/projects/social-app-2.jpg',
       '/images/projects/social-app-3.jpg',
     ],
-    liveUrl: 'https://social-app.example.com',
-    githubUrl: 'https://github.com/yourusername/social-app',
+    liveUrl: 'https://neonmobile.com',
+    githubUrl: '',
     appStoreUrl: 'https://apps.apple.com/app/id123456789',
     playStoreUrl: 'https://play.google.com/store/apps/details?id=com.example.social',
     startDate: '2023-06-01',
@@ -39,14 +40,14 @@ export const projects: Project[] = [
     testimonial: {
       content:
         'The app exceeded our expectations. The performance optimizations and attention to detail made a huge difference in user retention.',
-      author: 'Jane Smith',
-      role: 'Product Manager',
-      company: 'TechCorp',
+      author: 'Michael Dadi',
+      role: 'Founding Engineer',
+      company: 'Neon Mobile',
     },
   },
   {
-    id: 'ecommerce-platform',
-    title: 'E-Commerce Platform',
+    id: 'zealthy-telehealth-platform',
+    title: 'Zealthy Platform',
     description: 'Full-stack Next.js app with payments, inventory, and admin dashboard.',
     longDescription: `A complete e-commerce solution built with Next.js 14, featuring server-side 
                       rendering for SEO optimization, real-time inventory management, and a comprehensive 
@@ -57,8 +58,8 @@ export const projects: Project[] = [
     featured: true,
     techStack: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS', 'AWS'],
     image: '/images/projects/ecommerce-main.jpg',
-    liveUrl: 'https://shop.example.com',
-    githubUrl: 'https://github.com/yourusername/ecommerce',
+    liveUrl: 'https://getzealthy.com',
+    githubUrl: '',
     startDate: '2023-09-01',
     highlights: [
       'Processed $2M+ in transactions',

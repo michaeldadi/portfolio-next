@@ -74,7 +74,7 @@ export default function Contact() {
             <CalendlyButton text='Schedule a Call' />
             <a
               href={`mailto:${personalInfo.email}?subject=Project Inquiry`}
-              className='rounded-lg border border-gray-600 px-8 py-3 text-center font-semibold transition hover:bg-gray-700'
+              className='rounded-lg border border-gray-600 px-8 py-3 text-center font-semibold text-white transition hover:bg-gray-700'
             >
               Send Email
             </a>
