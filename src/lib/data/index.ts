@@ -31,7 +31,7 @@ export const personalInfo: PersonalInfo = {
   timezone: 'EST (UTC-5)',
   avatar: '/images/avatar.jpg',
   resume: '/resume.pdf',
-  availability: 'Busy',
+  availability: 'Available',
   preferredContact: 'Email',
   languages: ['English', 'Hebrew'],
 };
