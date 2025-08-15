@@ -1,6 +1,6 @@
 // components/ui/CustomSelect.tsx
 
-import { forwardRef, useState, useRef, useEffect, type ReactNode } from 'react';
+import { forwardRef, useState, useRef, useEffect, type ReactNode, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Check, X, AlertCircle, Search, Loader2 } from 'lucide-react';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
@@ -128,7 +128,7 @@ const CustomSelect = forwardRef<HTMLButtonElement, CustomSelectProps>(
     };
 
     // Handle clear
-    const handleClear = (e: React.MouseEvent) => {
+    const handleClear = (e: MouseEvent) => {
       e.stopPropagation();
       onChange(multiple ? [] : '');
     };
