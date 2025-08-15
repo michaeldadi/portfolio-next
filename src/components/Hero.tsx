@@ -38,12 +38,14 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className='mb-12 flex flex-col justify-center gap-4 sm:flex-row'>
             <CalendlyButton text='Schedule a Call' />
-            <a
-              href='#projects'
+            <button
+              onClick={() => {
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className='rounded-lg border border-gray-600 px-8 py-3 font-semibold text-white transition hover:bg-gray-800'
             >
               View My Work
-            </a>
+            </button>
           </div>
 
           {/* Social Links */}
