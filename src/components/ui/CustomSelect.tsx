@@ -163,6 +163,7 @@ const CustomSelect = forwardRef<HTMLButtonElement, CustomSelectProps>(
 
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen, highlightedIndex, filteredOptions]);
 
     // Focus search input when opened
@@ -197,7 +198,6 @@ const CustomSelect = forwardRef<HTMLButtonElement, CustomSelectProps>(
           className={`flex w-full items-center justify-between rounded-lg border bg-gray-900 px-4 py-3 transition-all duration-200 ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${isOpen ? 'border-purple-500 ring-2 ring-purple-500' : ''} ${error ? 'border-red-500' : 'border-gray-700 hover:border-gray-600'} ${!disabled && !error ? 'hover:bg-gray-800' : ''} `}
           aria-haspopup='listbox'
           aria-expanded={isOpen}
-          aria-invalid={!!error}
           aria-describedby={error ? `${id}-error` : undefined}
         >
           <div className='flex min-w-0 flex-1 items-center'>
@@ -315,7 +315,7 @@ const CustomSelect = forwardRef<HTMLButtonElement, CustomSelectProps>(
                             {group}
                           </div>
                         )}
-                        {groupOptions.map((option, index) => {
+                        {groupOptions.map(option => {
                           const isSelected = multiple
                             ? (value as string[])?.includes(option.value)
                             : value === option.value;
