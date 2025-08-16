@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     url: 'https://michaeldadi.com',
     siteName: 'Michael Dadi',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 const RootLayout = ({
@@ -37,9 +43,11 @@ const RootLayout = ({
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ScrollToTop />
-        <Providers>{children}</Providers>
-        <Analytics />
+        <div className='w-full overflow-x-hidden'>
+          <ScrollToTop />
+          <Providers>{children}</Providers>
+          <Analytics />
+        </div>
       </body>
     </html>
   );
