@@ -10,7 +10,7 @@ export default function About() {
     { label: 'Years Experience', value: getTotalYearsOfExperience(), icon: Briefcase },
     { label: 'Projects Completed', value: getProjectCount(), icon: Award },
     { label: 'Technologies', value: '20+', icon: GraduationCap },
-    { label: 'Happy Clients', value: '50+', icon: Users },
+    { label: 'Happy Users', value: '20,000+', icon: Users },
   ];
 
   return (

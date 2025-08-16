@@ -6,7 +6,7 @@ import Contact from '@/components/Contact';
 
 const Home = () => {
   return (
-    <main className='min-h-screen bg-gray-950'>
+    <main className='min-h-screen w-full overflow-x-hidden bg-gray-950'>
       <Hero />
       <ProjectsSection />
       <Skills />

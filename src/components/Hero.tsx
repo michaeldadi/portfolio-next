@@ -15,8 +15,8 @@ const Hero = () => {
       <div className='absolute inset-0 bg-gradient-to-br from-purple-900/20 via-gray-900 to-pink-900/20' />
 
       {/* Floating orbs */}
-      <div className='absolute top-20 left-10 h-72 w-72 animate-pulse rounded-full bg-purple-600/30 blur-3xl' />
-      <div className='absolute right-10 bottom-20 h-96 w-96 animate-pulse rounded-full bg-pink-600/30 blur-3xl delay-1000' />
+      <div className='absolute top-20 left-4 h-40 w-40 animate-pulse rounded-full bg-purple-600/30 blur-3xl sm:left-10 sm:h-72 sm:w-72' />
+      <div className='absolute right-4 bottom-20 h-48 w-48 animate-pulse rounded-full bg-pink-600/30 blur-3xl delay-1000 sm:right-10 sm:h-96 sm:w-96' />
 
       <div className='relative z-10 mx-auto max-w-7xl text-center'>
         <motion.div
