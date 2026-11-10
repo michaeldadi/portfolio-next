@@ -5,6 +5,22 @@ const release = JSON.parse(await readFile('dist/release.json', 'utf8'));
 const origin = process.env.TEST_ORIGIN;
 assert.ok(origin?.startsWith('https://'), 'An HTTPS deployment origin is required');
 const headers = {};
+if (release.environment === 'preview') {
+  const anonymous = await fetch(new URL('/', origin), {
+    redirect: 'manual',
+    signal: AbortSignal.timeout(15000),
+  });
+  assert.equal(anonymous.status, 302, 'Preview must redirect anonymous visitors to Access');
+  const destination = new URL(anonymous.headers.get('location') ?? '', origin);
+  assert.ok(
+    destination.hostname.endsWith('.cloudflareaccess.com'),
+    'Preview must use Cloudflare Access',
+  );
+  assert.ok(
+    process.env.CF_ACCESS_CLIENT_ID && process.env.CF_ACCESS_CLIENT_SECRET,
+    'Preview smoke checks require an Access service token',
+  );
+}
 if (process.env.CF_ACCESS_CLIENT_ID && process.env.CF_ACCESS_CLIENT_SECRET) {
   headers['CF-Access-Client-Id'] = process.env.CF_ACCESS_CLIENT_ID;
   headers['CF-Access-Client-Secret'] = process.env.CF_ACCESS_CLIENT_SECRET;

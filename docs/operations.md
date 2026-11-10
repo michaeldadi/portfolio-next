@@ -22,6 +22,10 @@ Use the account's `workers.dev` address for preview and attach `michaeldadi.com`
 9. The newly authored `vercel.json` disables the legacy Vercel Git deployment integration for this replacement. Retain the previous deployment as a recovery reference.
 10. After the first controlled production release and delivery check, set repository variable `CLOUDFLARE_DEPLOYS_ENABLED=true` to enable automatic production releases after successful `Portfolio checks` runs on main. Leave it unset during initial account and DNS setup.
 
+The configured domain remains provisional until ownership is established; see the correction in `release-status.md`. The first staging upload used a temporary configuration with both `workers_dev` and `preview_urls` disabled so Access could be prepared before any preview URL became reachable. The checked-in preview configuration enables its Worker hostname for a completed protected release, while version URLs remain explicitly disabled in both environments.
+
+Zero Trust Free onboarding currently requests billing details and overage authorization. Account owners complete that checkout and provider terms themselves. A local preview and an unrouted Worker remain available if that enrollment is deferred; neither is a protected hosted preview.
+
 ## Release commands
 
 ```sh
@@ -41,7 +45,7 @@ pnpm deploy:production
 
 The production command verifies the release environment, real verification key, analytics configuration, and required Worker secret names before deployment. It also verifies that the public configuration was included at build time. Both deployment commands set the health endpoint's revision from the artifact. The GitHub deployment workflow requires the main branch for production and does not retrieve secret values. Automatic releases check out the exact successful CI revision rather than the current branch tip.
 
-The deployment workflow runs `scripts/smoke.mjs` after deployment to verify the hosted revision, all content pages, CSP, crawler rules, résumé, RSS, sitemap, true 404 responses, and contact configuration readiness. Preview checks use the Access service token. The script does not send messages or establish inbox delivery.
+The deployment workflow runs `scripts/smoke.mjs` after deployment to verify the hosted revision, all content pages, CSP, crawler rules, résumé, RSS, sitemap, true 404 responses, and contact configuration readiness. Preview checks first require an anonymous redirect to Cloudflare Access, then use the Access service token. The script does not send messages or establish inbox delivery.
 
 ## Cutover
 
