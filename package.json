@@ -17,8 +17,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify": "pnpm format:check && pnpm lint && pnpm check && pnpm test && pnpm build && pnpm test:browser",
-    "deploy:preview": "wrangler deploy --env preview",
-    "deploy:production": "node scripts/assert-production.mjs && wrangler deploy --env production",
+    "deploy:preview": "node scripts/deploy.mjs preview",
+    "deploy:production": "node scripts/deploy.mjs production",
     "lint": "eslint .",
     "performance": "node scripts/performance.mjs"
   },

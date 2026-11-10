@@ -16,7 +16,9 @@ The Cloudflare Worker implements bounded validation, origin checks, Turnstile ve
 - Public résumé page layout and representative desktop/mobile pages were visually reviewed. Product diagrams are illustrative and contain synthetic examples.
 - Browser contact providers are explicit test fixtures. No real message has been sent or delivered by this implementation.
 
-Mobile Lighthouse measurements completed: three runs each of the homepage, Zealthy case study, and PostgreSQL article. Every page has median scores of 100 performance, 100 accessibility, and 100 best practices. Preview SEO scores are 69/66/66 because indexing is intentionally disabled; the only failing scored SEO audit is the expected crawler exclusion. These local measurements are not field performance or a production SEO result. Hosted CI results are added when completed.
+Mobile Lighthouse measurements completed: three runs each of the homepage, Zealthy case study, and PostgreSQL article. Every page has median scores of 100 performance, 100 accessibility, and 100 best practices. Preview SEO scores are 69/66/66 because indexing is intentionally disabled; the only failing scored SEO audit is the expected crawler exclusion. These local measurements are not field performance. Hosted CI and the final source revision are tracked in [draft PR #1](https://github.com/michaeldadi/portfolio-next/pull/1).
+
+A separate local production-mode build verified indexable metadata, crawler rules, and a valid Cloudflare Worker/static-assets dry run. The deployment guard correctly refused to publish without a real Turnstile key. This is a local release rehearsal, not a deployment.
 
 ## External launch requirements
 

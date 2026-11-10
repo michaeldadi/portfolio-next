@@ -25,7 +25,8 @@ Use the account's `workers.dev` address for preview and attach `michaeldadi.com`
 ## Release commands
 
 ```sh
-DEPLOY_ENV=preview pnpm build
+DEPLOY_ENV=preview PUBLIC_TURNSTILE_SITE_KEY=<preview-key> pnpm build
+export PREVIEW_ORIGIN=https://<protected-worker-hostname>
 pnpm deploy:preview
 ```
 
@@ -38,7 +39,7 @@ DEPLOY_ENV=production pnpm build
 pnpm deploy:production
 ```
 
-The production command verifies the release environment, real verification key, analytics configuration, and required Worker secret names before deployment. The GitHub deployment workflow also requires the main branch for production. It does not retrieve secret values. Automatic releases check out the exact successful CI revision rather than the current branch tip.
+The production command verifies the release environment, real verification key, analytics configuration, and required Worker secret names before deployment. It also verifies that the public configuration was included at build time. Both deployment commands set the health endpoint's revision from the artifact. The GitHub deployment workflow requires the main branch for production and does not retrieve secret values. Automatic releases check out the exact successful CI revision rather than the current branch tip.
 
 The deployment workflow runs `scripts/smoke.mjs` after deployment to verify the hosted revision, all content pages, CSP, crawler rules, résumé, RSS, sitemap, true 404 responses, and contact configuration readiness. Preview checks use the Access service token. The script does not send messages or establish inbox delivery.
 

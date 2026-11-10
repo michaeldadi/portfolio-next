@@ -108,6 +108,10 @@ await writeFile(
         process.env.GITHUB_SHA ??
         execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
       builtAt: new Date().toISOString(),
+      publicConfiguration: {
+        turnstileSiteKey: process.env.PUBLIC_TURNSTILE_SITE_KEY ?? null,
+        analyticsEnabled: Boolean(process.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN),
+      },
       routes: [...routes].sort(),
       compressedBytes: { javascript: js, css },
     },

@@ -7,8 +7,12 @@ if (release.environment !== 'production')
 const key = process.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 if (!key || /^[123]x0+/.test(key))
   throw new Error('A real production Turnstile site key is required');
+if (release.publicConfiguration?.turnstileSiteKey !== key)
+  throw new Error('The production artifact was not built with this Turnstile site key');
 if (!process.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN)
   throw new Error('Production Web Analytics configuration is required');
+if (!release.publicConfiguration?.analyticsEnabled)
+  throw new Error('The production artifact was built without Web Analytics');
 const keys = JSON.parse(
   execFileSync('pnpm', ['exec', 'wrangler', 'secret', 'list', '--env', 'production'], {
     encoding: 'utf8',
