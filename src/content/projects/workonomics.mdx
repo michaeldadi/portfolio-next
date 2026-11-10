@@ -1,0 +1,64 @@
+---
+title: 'A recruiting platform across web, mobile, and cloud.'
+description: 'Led the React Native and Next.js applications for a recruiting platform, designed serverless services across AWS, Firebase, and Google Cloud, and directed engineering interviews and onboarding. Query optimization and indexing improved database performance 36%.'
+publishedAt: 2026-11-10
+order: 3
+company: Workonomics
+role: Technical lead
+period: '2023 — 2024'
+headline: ['A recruiting', 'platform on', 'three clouds.']
+accent: coral
+technologies:
+  ['React Native', 'Next.js', 'AWS', 'Firebase', 'Google Cloud', 'Database optimization']
+outcome: 'Database performance improved 36% through query optimization and indexing.'
+---
+
+A recruiting platform has two sides of a workflow to connect. People need to find and act on opportunities, while organizations need to review and manage the resulting work. The web application, mobile application, and backend have to tell a coherent story.
+
+As Technical Lead at Workonomics from May 2023 through March 2024, I led development across React Native mobile and Next.js web applications, designed serverless backend services across AWS, Firebase, and Google Cloud Platform, and directed engineering interviews and onboarding.
+
+## One product across several surfaces
+
+Cross-platform work is partly about reuse, but it is also about choosing what should remain distinct. A shared concept such as an application status needs consistent meaning across clients. A mobile navigation pattern does not need to be identical to a desktop one.
+
+The engineering responsibility is to keep the product model understandable while letting each client suit its environment. That makes service contracts, state transitions, and error handling important parts of frontend work as well as backend work.
+
+## Working across cloud boundaries
+
+The backend involved AWS, Firebase, and Google Cloud Platform. Using several providers increases the importance of understanding where responsibilities live. Data access, deployment, credentials, and operational visibility can otherwise become difficult to follow.
+
+My role included designing the serverless services that supported the product. The useful architectural question was which component owned each responsibility and how the application could explain the result when work crossed a service boundary.
+
+The public diagram below describes the responsibilities, rather than exposing a private production topology:
+
+```text
+React Native application     Next.js application
+            \                 /
+             Product services
+              /     |      \
+           AWS   Firebase   Google Cloud
+```
+
+## Making database work measurable
+
+I improved database performance by **36%** through query optimization and indexing. The result describes database performance. Measuring the database workload separately from the endpoint and client makes that outcome useful.
+
+That distinction matters when presenting an optimization. A faster query, a faster endpoint, and a more responsive interface are related, but they are different measurements. The right validation follows the metric that was actually observed.
+
+The general workflow I use for query work is to establish a representative baseline, inspect the execution plan, make a targeted change, and compare the same workload again. The accompanying [indexing article](/writing/postgres-indexing/) develops that approach through a fictional PostgreSQL example. It is an engineering explanation, not a reproduction of Workonomics’ schema or benchmark.
+
+## Technical leadership
+
+I directed engineering interviews and onboarding alongside implementation. That combination makes the quality of an explanation consequential. A useful technical decision should remain understandable to someone who did not participate in the original discussion.
+
+For a team building across web, mobile, and cloud services, that means recording the ownership boundary and the reason for a choice. It also means making the path from a local change to a deployed behavior clear enough for a new engineer to follow.
+
+## Tradeoffs I take seriously
+
+Serverless services reduce some infrastructure responsibilities while making service contracts and observability more important. Multiple clients create opportunities for shared behavior while preserving platform-specific needs. Indexes improve selected access patterns while adding storage and write work.
+
+Those tradeoffs are useful when they are explicit. I prefer an architecture a team can explain and operate over one that only appears simple in a diagram.
+
+## What I take forward
+
+This role brought application delivery, backend design, performance work, and team development together. The recurring lesson was that a coherent product depends on clear boundaries: between clients, between services, and between a measured outcome and the explanation we attach to it.

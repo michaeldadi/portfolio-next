@@ -1,0 +1,135 @@
+---
+import Portrait from './Portrait.astro';
+---
+
+<section id="about" data-aid="about" class="bg-white py-16 md:py-24">
+  <div class="mx-auto w-full max-w-[1200px] px-5 md:px-8">
+    <article class="rv work-card rounded-2xl overflow-hidden flex flex-col lg:flex-row min-h-[440px]">
+      <div class="bg-[#010100] text-white p-7 md:p-10 lg:w-[58%] flex flex-col justify-between">
+        <div>
+          <div class="font-mono text-[12px] text-white/50 mb-5">About</div>
+          <h3 class="display text-[30px] md:text-[34px] leading-[1.1]">
+            Five years,
+            <br />
+            founding to on-call.
+          </h3>
+        </div>
+        <div class="mt-10 space-y-4 text-[16px] text-[#ddd] leading-relaxed max-w-[460px]">
+          <p>
+            I'm Michael, a senior software engineer and founding engineer in New York. Five-plus
+            years building production web and mobile products, owning architecture through delivery
+            across TypeScript, Next.js, React Native and AWS.
+          </p>
+          <p>
+            Today I lead architecture, development and production operations at Foresight RCM.
+            Before that: Zealthy's patient app, a recruiting platform at Workonomics, and React
+            Native work at SwiftHire and Seidenberg Creative Labs. B.S. in Computer Science, Pace
+            University.
+          </p>
+          <div class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[12px] text-white/60 pt-2 tnum">
+            <span>New York, NY</span>
+            <span>Senior / staff and founding roles</span>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-[42%] bg-[#eef1f8] min-h-[320px] lg:min-h-0 overflow-hidden">
+        <Portrait />
+      </div>
+    </article>
+
+    <div data-aid="experience" class="rv mt-6 md:mt-8 bg-[#f5f5f6] rounded-2xl p-6 md:p-10">
+      <div class="flex items-end justify-between mb-4 md:mb-6">
+        <h3 class="display text-[26px] md:text-[30px] leading-[1.05]">Experience.</h3>
+        <span class="font-mono text-[12px] text-[#6b6f78]">2017 — present</span>
+      </div>
+      <ul class="divide-y divide-hair">
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">Jun 2025 — present</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              Founding Engineer · Foresight RCM
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              Lead architecture, development and production operations for a revenue cycle
+              management and electronic prior authorization platform. FHIR R4, HL7v2/MLLP and X12
+              integrations; deployments, incident response and vendor activation.
+            </p>
+          </div>
+        </li>
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">Jan 2025 — Jun 2025</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              Senior Software Engineer, Mobile &amp; Full-Stack · Zealthy
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              Led mobile performance work that cut crashes 34%; built product flows that opened new
+              revenue streams and unified logging for system and error monitoring.
+            </p>
+          </div>
+        </li>
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">Apr 2024 — Jan 2025</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              Mobile &amp; Full Stack Engineer · Zealthy
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              Built the React Native and Expo app from the ground up to parity with web; mobile
+              CI/CD that cut deployment time 60%; Daily SDK video visits and PHI masking; ran
+              technical interviews.
+            </p>
+          </div>
+        </li>
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">May 2023 — Mar 2024</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              Technical Lead · Workonomics
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              Led a recruitment platform across React Native and Next.js; serverless services on
+              AWS, Firebase and Google Cloud; database performance up 36%; directed interviews and
+              onboarding.
+            </p>
+          </div>
+        </li>
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">Jul 2021 — May 2023</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              React Native Developer · SwiftHire
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              Sole React Native developer on a cross-platform app; reusable components that cut app
+              size, plus performance monitoring and stakeholder alerts.
+            </p>
+          </div>
+        </li>
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">Jun 2022 — Dec 2022</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              Software Engineer (part-time) · Seidenberg Creative Labs
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              React and React Native apps for Downtown Alliance and Pace University; MVP in one
+              month; code reviews and mentoring junior developers.
+            </p>
+          </div>
+        </li>
+        <li class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-1 md:gap-8 py-5">
+          <span class="font-mono text-[12px] text-[#6b6f78] tnum pt-1">Sep 2017 — Dec 2022</span>
+          <div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em]">
+              B.S. Computer Science · Pace University
+            </div>
+            <p class="text-[14px] text-[#2c3140] leading-relaxed mt-1 max-w-[640px]">
+              New York City.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

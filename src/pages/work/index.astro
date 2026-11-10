@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkPanels from '../../components/WorkPanels.astro';
+import Contact from '../../components/Contact.astro';
+---
+
+<BaseLayout
+  title="Selected work — Michael Dadi"
+  description="Four case studies across full-stack product engineering, mobile delivery, cloud services, and AI-assisted workflows."
+>
+  <section class="page-intro bg-navy text-white">
+    <div class="mx-auto max-w-[1200px] px-5 md:px-8">
+      <p class="eyebrow mb-5">Architecture · delivery · operations</p>
+      <h1 class="display">
+        Work that goes
+        <br />
+        the whole distance.
+      </h1>
+      <p class="mt-6 text-lg max-w-[640px] leading-relaxed">
+        The product decisions, technical boundaries, and operating work behind four projects.
+      </p>
+    </div>
+  </section>
+  <WorkPanels />
+  <Contact />
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WritingCards from '../../components/WritingCards.astro';
+import Contact from '../../components/Contact.astro';
+---
+
+<BaseLayout
+  title="Engineering notes — Michael Dadi"
+  description="Practical notes on logging boundaries, mobile release pipelines, and database optimization."
+>
+  <section class="page-intro bg-white">
+    <div class="mx-auto max-w-[1200px] px-5 md:px-8">
+      <p class="eyebrow mb-5 text-[#626773]">Notes from building and operating software</p>
+      <h1 class="display">
+        The decisions
+        <br />
+        behind the code.
+      </h1>
+      <p class="mt-6 text-lg max-w-[640px] leading-relaxed text-[#2c3140]">
+        Practical engineering, measured outcomes, and the tradeoffs worth writing down.
+      </p>
+    </div>
+  </section>
+  <WritingCards />
+  <Contact />
+</BaseLayout>

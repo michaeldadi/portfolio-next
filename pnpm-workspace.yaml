@@ -1,0 +1,9 @@
+# Compatible, established releases selected after minimum-age policy blocks.
+overrides:
+  'ansi-regex@': 6.2.2
+  'rolldown@': 1.2.16
+minimumReleaseAge: 4320
+saveExact: true
+allowBuilds:
+  esbuild@0.28.2: true
+  workerd@1.20261104.1: true

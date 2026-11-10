@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.jpg';
+interface Props {
+  class?: string;
+  hero?: boolean;
+}
+const { class: className = '', hero = false } = Astro.props;
+---
+
+<Image
+  src={portrait}
+  alt="Michael Dadi"
+  width={hero ? 640 : 800}
+  height={hero ? 854 : 1000}
+  format="webp"
+  quality={85}
+  loading={hero ? 'eager' : 'lazy'}
+  class:list={['portrait-image', className]}
+/>

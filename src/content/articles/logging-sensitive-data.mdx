@@ -1,0 +1,77 @@
+---
+title: 'Mask PHI at the logger, not at the call site.'
+description: 'A logging boundary that keeps useful operational evidence while reducing accidental exposure of sensitive application data.'
+publishedAt: 2026-11-10
+order: 1
+topics: ['Sensitive data', 'Node', 'Observability']
+---
+
+The easiest logging policy to bypass is one that every call site has to remember. A developer adds a useful debug statement, an SDK serializes an unexpected error, or a request object grows a new field. The application still works. The log now contains information nobody intended to send there.
+
+In my healthcare engineering work, I implemented PHI masking and unified logging. The lesson I carry into other products is to make the boundary enforce the policy. Call sites should describe an operational event; they should not decide which parts of a domain object are safe to serialize.
+
+## Start with the event you need
+
+When investigating a failed request, I usually need to know which operation ran, how long it took, what category of failure occurred, and which other events belong to the same request. That is different from needing the entire request body.
+
+An event contract makes that distinction concrete:
+
+```ts
+type RequestResult = {
+  event: 'request.completed';
+  requestId: string;
+  route: 'contact' | 'document-review';
+  status: number;
+  durationMs: number;
+};
+
+export function serializeRequestResult(result: RequestResult): string {
+  return JSON.stringify({
+    event: 'request.completed',
+    requestId: result.requestId,
+    route: result.route,
+    status: result.status,
+    durationMs: result.durationMs,
+  });
+}
+```
+
+This illustrative example deliberately projects a small set of fields. It does not spread the input object. Even if a runtime caller passes additional properties, they do not enter the serialized event through this function.
+
+The contract still needs sensible values: an opaque request identifier, a controlled route label, and numeric status and timing fields. Naming an arbitrary URL `route` would not make its query string safe.
+
+## Allowlist first, redact where necessary
+
+A denylist can catch familiar names such as password, token, or date of birth. It cannot anticipate every future schema, nested object, or alternate spelling. An allowlist is easier to reason about when an event has a narrow operational purpose.
+
+For systems that also need broader structured events, use a reviewed redaction policy at the serialization boundary. The policy should account for nesting, collections, error objects, and the behavior of the logging library. It should be applied before data is sent to a sink.
+
+OWASP’s logging guidance is a useful starting point for deciding which categories of information should be excluded and how logging behavior should be verified. The implementation still has to fit the application’s data model. [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
+
+## Error handling deserves its own design
+
+An error can carry more than its message. Request libraries may attach configuration, headers, response bodies, or causes. Passing the complete object to a logger gives those details another route out of the application.
+
+I prefer stable failure categories for routine operational events: verification unavailable, upstream timeout, invalid response, or permission denied. The application can record a category and a correlation identifier without repeating the input that triggered the error.
+
+When a diagnostic trace is necessary, treat it as a separate, controlled capability. Decide who can access it, which environments may produce it, and what retention is appropriate. A debug setting should not silently turn ordinary logs into copies of business records.
+
+## Test the bytes that leave the process
+
+Testing a masking helper is useful, but the most valuable assertion is against the serialized output. That is the artifact that another system receives.
+
+I would include cases for unexpected extra fields, nested sensitive fields, arrays, error causes, cyclic values, and values that resemble credentials. For an allowlisted event, test that unrelated input never appears in the emitted string. For a generic redactor, test depth and failure behavior as well as familiar field names.
+
+Also test what happens when the sink fails. An unavailable logging service should not cause a contact form to disclose its payload through a fallback `console.error` call. The fallback needs the same data boundary as the primary path.
+
+## Redaction has limits
+
+A structured policy does not reliably identify every sensitive fact in arbitrary free text. It cannot prove that a whole workflow is de-identified. It also does not replace access controls, encryption, retention decisions, or the other requirements of a regulated system.
+
+That is a reason to keep the logging contract small. If a field is not needed for an operational question, excluding it is usually a stronger control than trying to infer every sensitive value it might contain.
+
+## Make the useful path the easy path
+
+The developer experience matters. Provide a small set of event helpers, clear examples, and a way to correlate events without passing whole domain objects around. Review new event types with the same care as a new API response.
+
+The result is more useful observability: a log that explains the operation, a request identifier that connects the evidence, and fewer accidental copies of the information the product exists to protect.

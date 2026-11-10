@@ -1,0 +1,71 @@
+---
+import { site } from '../lib/site';
+const home = Astro.url.pathname === '/';
+const links = [
+  ['Work', 'work'],
+  ['Stack', 'stack'],
+  ['Writing', 'writing'],
+  ['About', 'about'],
+];
+---
+
+<header data-aid="nav" class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-hair">
+  <div class="mx-auto w-full max-w-[1280px] px-5 md:px-8 h-[60px] flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3" aria-label="Michael Dadi home">
+      <span class="w-9 h-9 rounded-md bg-cobalt text-white display text-[15px] flex items-center justify-center tracking-normal">
+        MD
+      </span>
+      <span class="hidden md:inline font-display font-medium text-[14px]">Michael Dadi</span>
+    </a>
+    <nav
+      aria-label="Main navigation"
+      class="hidden md:flex items-center gap-8 font-display font-medium text-[14px]"
+    >
+      {links.map(([label, anchor]) => (
+        <a class="navlink" href={`${home ? '' : '/'}#${anchor}`}>
+          {label}
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-2">
+      <a
+        href={site.github}
+        class="pill hidden md:inline-flex bg-[#f1f1f2] text-ink hover:bg-[#e6e6e8]"
+      >
+        GitHub
+      </a>
+      <a
+        href={`${home ? '' : '/'}#contact`}
+        data-aid="cta-primary"
+        class="pill bg-ink text-white hover:bg-black"
+      >
+        Hire me
+      </a>
+      <details class="mobile-menu md:hidden">
+        <summary
+          class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#f1f1f2]"
+          aria-label="Open navigation menu"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </summary>
+        <nav aria-label="Mobile navigation" class="mobile-menu-panel">
+          {links.map(([label, anchor]) => (
+            <a href={`${home ? '' : '/'}#${anchor}`}>{label}</a>
+          ))}
+          <a href={site.github}>GitHub</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

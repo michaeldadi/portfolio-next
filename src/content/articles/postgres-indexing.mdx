@@ -1,0 +1,75 @@
+---
+title: 'The indexing pass that gave back 36%.'
+description: 'A practical approach to query optimization: establish a baseline, inspect the plan, choose a targeted index, and measure the same workload again.'
+publishedAt: 2026-11-10
+order: 3
+topics: ['PostgreSQL', 'Query plans', 'Performance']
+---
+
+At Workonomics, I improved database performance by 36% through query optimization and indexing. That result describes database performance. Keeping the measurement boundary clear helps connect a technical change to its observed effect.
+
+The repeatable part of the work is the method. Start with the workload, inspect how the database executes it, change one relevant constraint, and compare the same measurement again. The example below uses a fictional recruiting schema rather than a production query.
+
+## Define what slow means
+
+A complaint that a page feels slow can start an investigation, but it is not yet a database measurement. Separate time in the client, application, database, and external services. Identify the query shape and parameters associated with the slow path.
+
+Build a representative baseline. Include realistic data volume and distribution, not only a small development database. Record the environment and keep enough context to repeat the measurement after a change.
+
+## Read the plan before choosing the index
+
+For a read-only query in an appropriate test environment, an execution plan can make the work visible:
+
+```sql
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT id, status, created_at
+FROM applications
+WHERE organization_id = 42
+  AND status = 'submitted'
+ORDER BY created_at DESC, id DESC
+LIMIT 50;
+```
+
+Look at the plan as an explanation of work: which rows are visited, which are filtered out, where sorting happens, and whether estimated row counts resemble actual ones. A mismatch can point to a statistics or selectivity problem rather than simply a missing index.
+
+`ANALYZE` executes the statement. Use particular care when examining writes or queries with side effects. PostgreSQL’s own examples also explain why plan costs are not interchangeable with elapsed time. [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html).
+
+## Match an access pattern
+
+For this fictional query, one candidate to evaluate is:
+
+```sql
+CREATE INDEX CONCURRENTLY applications_org_status_created_idx
+ON applications (
+  organization_id,
+  status,
+  created_at DESC,
+  id DESC
+);
+```
+
+The equality predicates come before the ordered fields. That gives the index a relationship to the actual access pattern rather than merely to the set of columns appearing in the query.
+
+This is a candidate, not a universal recommendation. Other queries, data distributions, and existing indexes may change what is useful. The behavior of a multicolumn B-tree depends on the predicates and the leading columns; PostgreSQL documents those details and relevant planner optimizations. [Multicolumn indexes](https://www.postgresql.org/docs/current/indexes-multicolumn.html).
+
+## Account for the cost of adding it
+
+An index consumes storage and adds work when indexed data changes. A wide or redundant index may make selected reads faster while creating a different operating cost. Review the wider workload rather than scoring the change on one query alone.
+
+Plan the migration as well. Concurrent index creation has different operational constraints from a regular index build, including restrictions on transaction blocks and behavior when a build fails. Fit the operation to the application’s migration tooling and verify the index state afterwards. [CREATE INDEX](https://www.postgresql.org/docs/current/sql-createindex.html).
+
+## Compare the same thing twice
+
+Repeat the original measurement with the same query shape and representative parameters. Compare elapsed time alongside the plan and the amount of work performed. Check more than one run and distinguish warm-cache behavior from a first access.
+
+Then return to the user-facing path. If the database change helps but the endpoint is still slow, there is another boundary to investigate. Avoid presenting a query improvement as an equal percentage improvement to the whole request unless that was measured too.
+
+## Leave a useful record
+
+The durable artifact is a small explanation: the affected workload, the observed bottleneck, the chosen change, the before-and-after measurement boundary, and the operational tradeoff. Include the reason for keeping or rejecting an index.
+
+That record is valuable when the product changes. A new filter, a different sort order, or a much larger organization can invalidate assumptions that made an index effective. A clear account of the original decision makes the next investigation faster.
+
+## Performance work is a feedback loop
+
+The most satisfying optimizations often come from understanding the system more accurately. The 36% result is one outcome from my work; the approach I reuse is to make the workload and the evidence clear enough that another engineer can repeat the reasoning.

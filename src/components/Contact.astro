@@ -1,0 +1,128 @@
+---
+import { site } from '../lib/site';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+---
+
+<section id="contact" data-aid="contact" class="bg-white pt-8 pb-20 md:pt-12 md:pb-28">
+  <div class="mx-auto w-full max-w-[1100px] px-5 md:px-8 text-center">
+    <h2 class="rv display text-[44px] md:text-[64px] leading-[1.02] break-words">
+      Let's build it.
+    </h2>
+    <p class="rv text-[17px] text-[#2c3140] mt-5 max-w-[560px] mx-auto">
+      Hiring a senior or founding engineer who ships the whole stack? Tell me what you're building.
+    </p>
+    <form
+      data-aid="contact-form"
+      id="contact-form"
+      action="/api/contact"
+      method="post"
+      data-sitekey={siteKey}
+      class="rv mt-10 mx-auto w-full max-w-[640px] bg-[#f5f5f6] rounded-2xl p-5 md:p-8 text-left"
+      novalidate
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label class="block">
+          <span id="name-label" class="font-mono text-[12px] text-[#606570]">
+            Name
+          </span>
+          <input
+            type="text"
+            name="name"
+            aria-labelledby="name-label"
+            required
+            maxlength="100"
+            autocomplete="name"
+            placeholder="Jordan Lee"
+            aria-describedby="name-error"
+            class="form-input"
+          />
+          <span id="name-error" class="field-error"></span>
+        </label>
+        <label class="block">
+          <span id="email-label" class="font-mono text-[12px] text-[#606570]">
+            Work email
+          </span>
+          <input
+            type="email"
+            name="email"
+            aria-labelledby="email-label"
+            required
+            maxlength="254"
+            autocomplete="email"
+            inputmode="email"
+            placeholder="jordan@company.com"
+            aria-describedby="email-error"
+            class="form-input"
+          />
+          <span id="email-error" class="field-error"></span>
+        </label>
+      </div>
+      <label class="block mt-4">
+        <span id="message-label" class="font-mono text-[12px] text-[#606570]">
+          What are you building?
+        </span>
+        <textarea
+          name="message"
+          aria-labelledby="message-label"
+          required
+          minlength="10"
+          maxlength="5000"
+          rows="4"
+          placeholder="A sentence or two about the team, the stack and the problem."
+          aria-describedby="message-error"
+          class="form-input !h-auto py-3 leading-relaxed resize-y"
+        ></textarea>
+        <span id="message-error" class="field-error"></span>
+      </label>
+      <div
+        id="contact-verification"
+        role="group"
+        class="mt-4 min-h-0"
+        aria-label="Spam protection"
+      ></div>
+      <div class="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <span class="font-mono text-[12px] text-[#606570]">
+          Goes straight to my inbox. No mailing list.
+        </span>
+        <button
+          type="submit"
+          data-aid="contact-submit"
+          disabled
+          class="pill bg-ink text-white hover:bg-black w-full sm:w-auto disabled:opacity-60"
+        >
+          Send message
+        </button>
+      </div>
+      <p id="contact-status" class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+
+      <p data-contact-fallback class="mt-4 text-sm">
+        JavaScript is needed for spam protection. You can also{' '}
+        <a href={site.linkedin} class="underline">
+          connect on LinkedIn
+        </a>
+        .
+      </p>
+    </form>
+    <div class="rv mt-6 flex flex-wrap justify-center gap-3 font-display font-medium text-[14px]">
+      <a
+        href={site.github}
+        class="pill h-11 px-4 bg-[#f1f1f2] text-ink hover:bg-[#e6e6e8] text-[14px]"
+      >
+        GitHub
+      </a>
+      <a
+        href={site.linkedin}
+        class="pill h-11 px-4 bg-[#f1f1f2] text-ink hover:bg-[#e6e6e8] text-[14px]"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="/resume.pdf"
+        class="pill h-11 px-4 bg-[#f1f1f2] text-ink hover:bg-[#e6e6e8] text-[14px]"
+        download="Michael-Dadi-Resume.pdf"
+      >
+        Resume (PDF)
+      </a>
+    </div>
+  </div>
+</section>

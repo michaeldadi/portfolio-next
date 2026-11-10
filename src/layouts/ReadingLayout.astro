@@ -1,0 +1,91 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Contact from '../components/Contact.astro';
+import { formatDate } from '../lib/site';
+interface Props {
+  title: string;
+  description: string;
+  kind: 'work' | 'writing';
+  date: Date;
+  updated?: Date;
+  company?: string;
+  role?: string;
+  period?: string;
+  technologies?: string[];
+  topics?: string[];
+  accent?: string;
+  related: { title: string; href: string }[];
+}
+const {
+  title,
+  description,
+  kind,
+  date,
+  updated,
+  company,
+  role,
+  period,
+  technologies,
+  topics,
+  accent,
+  related,
+} = Astro.props;
+const colors = {
+  cobalt: 'bg-cobalt text-white',
+  sun: 'bg-sun text-ink',
+  coral: 'bg-[#d8573e] text-ink',
+  mint: 'bg-mint text-ink',
+};
+const introClass = accent ? colors[accent as keyof typeof colors] : 'bg-[#f5f5f6] text-ink';
+---
+
+<BaseLayout
+  title={`${title} — Michael Dadi`}
+  description={description}
+  article={
+    kind === 'writing'
+      ? { publishedAt: date.toISOString(), modifiedAt: (updated ?? date).toISOString() }
+      : undefined
+  }
+>
+  <section class:list={['page-intro', introClass]}>
+    <div class="mx-auto max-w-[1200px] px-5 md:px-8">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true"> / </span>
+        <a href={`/${kind}/`}>{kind === 'work' ? 'Work' : 'Writing'}</a>
+      </nav>
+      <p class="eyebrow mb-5">
+        {kind === 'work' ? `${company} · ${period}` : `${formatDate(date)} · Engineering notes`}
+      </p>
+      <h1 class="display">{title}</h1>
+      <p class="mt-6 text-[18px] md:text-[21px] leading-relaxed max-w-[780px]">{description}</p>
+    </div>
+  </section>
+  <div class="reading-layout">
+    <aside class="reading-meta" aria-label="Page details">
+      <dl>
+        <dt>{kind === 'work' ? 'Role' : 'Author'}</dt>
+        <dd>{role ?? 'Michael Dadi'}</dd>
+        <dt>{kind === 'work' ? 'Stack' : 'Topics'}</dt>
+        <dd>{(technologies ?? topics ?? []).join(' · ')}</dd>
+        <dt>Updated</dt>
+        <dd>{formatDate(updated ?? date)}</dd>
+      </dl>
+    </aside>
+    <article class="prose">
+      <slot />
+      <nav class="related-work" aria-label="Continue reading">
+        <h2>More {kind === 'work' ? 'selected work' : 'engineering notes'}.</h2>
+        <ul>
+          {related.map((item) => (
+            <li>
+              <a href={item.href}>{item.title}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </article>
+  </div>
+  <Contact />
+</BaseLayout>

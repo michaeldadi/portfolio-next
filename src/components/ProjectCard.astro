@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { projectVisuals } from '../lib/project-visuals';
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { data, id } = project;
+const aid =
+  {
+    'foresight-rcm': 'rcm',
+    'zealthy-mobile': 'mobile',
+    workonomics: 'recruiting',
+    'rcm-copilot': 'copilot',
+  }[id] ?? id;
+---
+
+<div>
+  <article
+    id={`work-${id}`}
+    data-aid={`work-${aid}`}
+    class:list={[
+      'rv work-card rounded-2xl overflow-hidden flex flex-col min-h-[420px]',
+      data.order % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row',
+    ]}
+  >
+    <div class="bg-[#010100] text-white p-7 md:p-10 lg:w-[58%] flex flex-col justify-between">
+      <div>
+        <div class="font-mono text-[12px] text-white/65 mb-5">
+          {String(data.order).padStart(2, '0')} · {data.role} · {data.company} · {data.period}
+        </div>
+        <h3 class="display text-[30px] md:text-[34px] leading-[1.1]">
+          {data.headline.map((line, index) => (
+            <>
+              {line}
+              {index < data.headline.length - 1 && <br />}
+            </>
+          ))}
+        </h3>
+      </div>
+      <div class="mt-10">
+        <p class="text-[16px] text-[#ddd] leading-relaxed max-w-[420px]">{data.description}</p>
+        <a
+          href={`/work/${id}/`}
+          class="ghost inline-flex items-center min-h-11 px-4 rounded-full text-[13px] font-display font-medium mt-5"
+          aria-label={`Read the ${data.company} ${id === 'rcm-copilot' ? 'copilot ' : ''}case study`}
+        >
+          Read the case study
+        </a>
+      </div>
+    </div>
+    <Fragment set:html={projectVisuals[id]} />
+  </article>
+  <p class="rv font-mono text-[12px] text-[#626773] tnum mt-4 px-1 leading-relaxed">
+    {data.outcome}{' '}
+    <span class="block mt-1 text-[10px]">Product figure uses illustrative data.</span>
+  </p>
+</div>
