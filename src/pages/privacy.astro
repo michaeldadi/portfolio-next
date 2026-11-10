@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout
+  title="Analytics & privacy — Michael Dadi"
+  description="How this portfolio handles contact messages, operational logs, and Cloudflare Web Analytics."
+>
+  <section class="page-intro bg-[#f5f5f6]">
+    <div class="mx-auto max-w-[1000px] px-5 md:px-8">
+      <p class="eyebrow mb-5">Updated November 10, 2026</p>
+      <h1 class="display">Analytics &amp; privacy.</h1>
+    </div>
+  </section>
+  <div class="mx-auto max-w-[800px] px-5 md:px-8 py-16 prose">
+    <h2>Contact messages</h2>
+    <p>
+      The contact form asks for your name, email address, and message. A server-side service sends
+      the message through Resend to my private inbox so I can respond. Your address is used as the
+      reply address. Submitting the form does not subscribe you to a mailing list.
+    </p>
+    <p>
+      The website does not maintain a contact-message database. Message content is processed by the
+      email provider and stored in the receiving mailbox. Please send only information relevant to
+      your inquiry.
+    </p>
+    <h2>Spam protection</h2>
+    <p>
+      The form uses Cloudflare Turnstile and approximate request throttling to reduce automated
+      abuse. Verification is checked by the server before a message is accepted. If the form is
+      unavailable, you can <a href={site.linkedin}>connect with me on LinkedIn</a>.
+    </p>
+    <h2>Website analytics</h2>
+    <p>
+      The production site uses Cloudflare Web Analytics to understand visits and page performance.
+      Contact-form values are not sent as analytics events or added to page URLs. Analytics is
+      disabled on development and preview builds.
+    </p>
+    <p>
+      Read{' '}
+      <a href="https://developers.cloudflare.com/web-analytics/about/">
+        Cloudflare’s explanation of Web Analytics
+      </a>{' '}
+      and <a href="https://www.cloudflare.com/privacypolicy/">its privacy policy</a> for the
+      provider’s processing details.
+    </p>
+    <h2>Operational information</h2>
+    <p>
+      Cloudflare hosts this site and processes requests needed to serve it. Application logs record
+      operational information such as response categories, timing, and request identifiers. The
+      application does not log contact-message bodies, names, email addresses, or verification
+      tokens. Provider-level request processing is governed by the providers’ policies.
+    </p>
+    <h2>Service providers and external links</h2>
+    <p>
+      The site uses Cloudflare for hosting, verification, and analytics, and Resend for contact
+      delivery. GitHub and LinkedIn links take you to those services, where their own policies
+      apply. Fonts and portrait assets are served with this site.
+    </p>
+    <p>
+      For a question about a message you submitted, use the <a href="/#contact">contact form</a> or
+      LinkedIn. Useful references:{' '}
+      <a href="https://resend.com/legal/privacy-policy">Resend privacy policy</a> and{' '}
+      <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy policy</a>.
+    </p>
+  </div>
+</BaseLayout>

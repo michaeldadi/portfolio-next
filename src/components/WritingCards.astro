@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate, readingTime } from '../lib/site';
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<section id="writing" data-aid="writing" class="bg-[#f5f5f6] py-16 md:py-24">
+  <div class="mx-auto w-full max-w-[1200px] px-5 md:px-8">
+    <div class="rv flex items-end justify-between mb-8 md:mb-12">
+      <h2 class="display text-[36px] md:text-[48px] leading-[1.02]">Engineering notes.</h2>
+      <a href="/writing/" class="hidden md:inline font-display font-medium text-[14px] navlink">
+        All posts
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+      {articles.map((article) => (
+        <a
+          href={`/writing/${article.id}/`}
+          data-aid={`post-${article.data.order}`}
+          class="rv post bg-white rounded-2xl p-7 md:p-8 flex flex-col justify-between min-h-[320px] hover:shadow-[0_24px_48px_-24px_rgba(7,11,21,.25)] transition-shadow"
+        >
+          <div>
+            <div class="font-mono text-[12px] text-[#626773]">
+              {formatDate(article.data.publishedAt)} · {readingTime(article.body)} min
+            </div>
+            <h3 class="display text-[28px] md:text-[34px] leading-[1.1] mt-4">
+              {article.data.title}
+            </h3>
+          </div>
+          <div class="flex items-center justify-between mt-8 text-[14px] text-[#626773]">
+            <span>{article.data.topics.slice(0, 2).join(' · ')}</span>
+            <svg
+              class="post-arrow"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#070b15"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17L17 7M9 7h8v8" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

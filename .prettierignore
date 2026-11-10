@@ -1,0 +1,10 @@
+node_modules/
+.buildkite-cache/
+.astro/
+.wrangler/
+dist/
+test-results/
+playwright-report/
+artifacts/
+pnpm-lock.yaml
+public/licenses/

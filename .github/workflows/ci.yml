@@ -1,0 +1,55 @@
+name: Portfolio checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DEPLOY_ENV: preview
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v4
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils libc++1
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm check
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm test:browser --workers=2
+      - name: Measure representative mobile performance
+        shell: bash
+        run: |
+          pnpm preview > /tmp/portfolio-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          node scripts/wait-for-preview.mjs
+          pnpm performance
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-report-and-review-screenshots
+          path: |
+            playwright-report/
+            test-results/
+            artifacts/
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preview-static-release
+          path: dist/
+          retention-days: 7

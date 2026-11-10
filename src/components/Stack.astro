@@ -1,0 +1,360 @@
+<section id="stack" data-aid="stack" class="bg-cobalt text-white py-16 md:py-24 overflow-hidden">
+  <div class="mx-auto w-full max-w-[1200px] px-5 md:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+    <div class="rv lg:w-1/2">
+      <h2 class="display text-[40px] md:text-[48px] leading-[1.05]">
+        Boring tools,
+        <br />
+        sharp edges.
+      </h2>
+      <p class="text-[20px] leading-[1.45] mt-6 max-w-[480px] text-white/90">
+        I pick tools a team can run at 3 a.m. Aurora before a new database, a queue before a
+        framework, a metric before a guess. The craft is in how they fit together, and in the audit
+        log that proves it.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-2 font-mono text-[12px]">
+        <span class="px-3 h-8 inline-flex items-center rounded-full bg-white/10 border border-white/15">
+          TypeScript
+        </span>
+        <span class="px-3 h-8 inline-flex items-center rounded-full bg-white/10 border border-white/15">
+          Next.js
+        </span>
+        <span class="px-3 h-8 inline-flex items-center rounded-full bg-white/10 border border-white/15">
+          React Native
+        </span>
+        <span class="px-3 h-8 inline-flex items-center rounded-full bg-white/10 border border-white/15">
+          Expo
+        </span>
+        <span class="px-3 h-8 inline-flex items-center rounded-full bg-white/10 border border-white/15">
+          AWS CDK
+        </span>
+        <span class="px-3 h-8 inline-flex items-center rounded-full bg-white/10 border border-white/15">
+          Aurora
+        </span>
+      </div>
+    </div>
+    <div class="rv lg:w-1/2 relative flex justify-center lg:justify-end min-h-[460px] w-full">
+      <div
+        class="coin-bronze absolute w-[220px] h-[220px] rounded-full right-[6%] top-0 lg:right-[20%] lg:-top-4"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="coin-blue absolute w-[260px] h-[260px] rounded-full left-[8%] bottom-0 lg:left-[6%] lg:bottom-0"
+        aria-hidden="true"
+      ></div>
+      <div class="glass relative rounded-[18px] w-full max-w-[340px] p-6 mt-10">
+        <div class="display text-[20px] text-center tracking-[-0.02em]">Tooling</div>
+        <div
+          class="flex justify-center gap-5 mt-4 font-display font-medium text-[13px]"
+          role="tablist"
+          aria-label="Tooling categories"
+          data-tabs="tooling"
+        >
+          <button
+            type="button"
+            class="tool-tab"
+            role="tab"
+            id="tooling-product-tab"
+            aria-controls="tooling-product"
+            aria-selected="true"
+            data-tool-tab="product"
+          >
+            Product
+          </button>
+          <button
+            type="button"
+            class="tool-tab"
+            role="tab"
+            id="tooling-aws-tab"
+            aria-controls="tooling-aws"
+            aria-selected="false"
+            tabindex="-1"
+            data-tool-tab="aws"
+          >
+            AWS
+          </button>
+          <button
+            type="button"
+            class="tool-tab"
+            role="tab"
+            id="tooling-health-tab"
+            aria-controls="tooling-health"
+            aria-selected="false"
+            tabindex="-1"
+            data-tool-tab="health"
+          >
+            Health data
+          </button>
+          <button
+            type="button"
+            class="tool-tab"
+            role="tab"
+            id="tooling-ai-tab"
+            aria-controls="tooling-ai"
+            aria-selected="false"
+            tabindex="-1"
+            data-tool-tab="ai"
+          >
+            AI
+          </button>
+        </div>
+        <div
+          id="tooling-product"
+          class="tool-panel"
+          role="tabpanel"
+          aria-labelledby="tooling-product-tab"
+        >
+          <ul class="mt-5 font-display font-bold text-[15px]">
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <circle cx="12" cy="12" r="2" />
+                  <path d="M12 2c3 0 6 4.5 6 10s-3 10-6 10-6-4.5-6-10 3-10 6-10z" />
+                  <path d="M3 7l18 10M3 17L21 7" />
+                </svg>
+              </span>
+              React + Next.js
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <rect x="6" y="2" width="12" height="20" rx="2" />
+                  <path d="M11 18h2" />
+                </svg>
+              </span>
+              React Native + Expo
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <path d="M4 4h16v6H4zM4 14h16v6H4z" />
+                </svg>
+              </span>
+              Lambda · Aurora · Step Functions · SQS · CDK
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <path d="M4 7l6 5-6 5M12 17h8" />
+                </svg>
+              </span>
+              FHIR R4 · HL7v2/MLLP · X12
+            </li>
+            <li class="flex items-center gap-3 py-3">
+              <span class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                >
+                  <path d="M3 12h4l3-8 4 16 3-8h4" />
+                </svg>
+              </span>
+              Amazon Bedrock + Gemini
+            </li>
+          </ul>
+        </div>
+        <div
+          id="tooling-aws"
+          class="tool-panel"
+          role="tabpanel"
+          aria-labelledby="tooling-aws-tab"
+          hidden
+        >
+          <ul class="mt-5 font-display font-bold text-[15px]">
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Lambda · event-driven services
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Aurora · relational data
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Step Functions · orchestration
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              SQS · asynchronous work
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              CDK · infrastructure as code
+            </li>
+          </ul>
+        </div>
+        <div
+          id="tooling-health"
+          class="tool-panel"
+          role="tabpanel"
+          aria-labelledby="tooling-health-tab"
+          hidden
+        >
+          <ul class="mt-5 font-display font-bold text-[15px]">
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              FHIR R4 · resource APIs
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              HL7v2 / MLLP · messaging
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              X12 · eligibility and claims
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Healthie · eClinicalWorks
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Claim.MD · Stedi · DoseSpot
+            </li>
+          </ul>
+        </div>
+        <div
+          id="tooling-ai"
+          class="tool-panel"
+          role="tabpanel"
+          aria-labelledby="tooling-ai-tab"
+          hidden
+        >
+          <ul class="mt-5 font-display font-bold text-[15px]">
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Amazon Bedrock
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Gemini
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Policy evidence and extraction
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Sensitive-data safeguards
+            </li>
+            <li class="flex items-center gap-3 py-3 border-b border-white/20">
+              <span
+                aria-hidden="true"
+                class="w-8 h-8 rounded-full bg-white text-cobalt flex items-center justify-center shrink-0"
+              >
+                ↗
+              </span>
+              Human review and auditability
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

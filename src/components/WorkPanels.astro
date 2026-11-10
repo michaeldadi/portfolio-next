@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<section id="work" data-aid="work" class="bg-white py-16 md:py-24">
+  <div class="mx-auto w-full max-w-[1200px] px-5 md:px-8">
+    <div class="rv flex items-end justify-between mb-8 md:mb-12">
+      <h2 class="display text-[36px] md:text-[48px] leading-[1.02]">
+        Selected work.
+        <br />
+        <span class="text-[#747a86]">Founding to on-call.</span>
+      </h2>
+      <span class="hidden md:inline font-mono text-[12px] text-[#626773]">2023 — present</span>
+    </div>
+    <div class="space-y-6 md:space-y-8">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </div>
+</section>

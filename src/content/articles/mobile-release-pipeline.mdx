@@ -1,0 +1,72 @@
+---
+title: 'How a mobile CI pipeline cut our deploy time 60%.'
+description: 'Designing a mobile release path around quick feedback, explicit build profiles, observable distribution, and a practiced recovery path.'
+publishedAt: 2026-11-10
+order: 2
+topics: ['React Native', 'Expo', 'CI/CD']
+---
+
+At Zealthy, I created a mobile CI/CD pipeline that reduced deployment time by 60%. The useful lesson is broader than a faster build command: a release process should make a change easy to validate, distribute, and understand afterwards.
+
+The illustrative workflow below explains the decisions that make that kind of improvement useful.
+
+## Measure a boundary, not a feeling
+
+Before changing a pipeline, decide what the measurement includes. Time spent waiting for a runner is different from native compilation time. Store review is different from distributing an internal test build. Human handoffs can dominate a process even when every command is fast.
+
+A useful release record identifies the source revision, target environment, build profile, start and end points, and distribution result. Keep those boundaries the same when comparing the baseline with the improved process. Otherwise, a change in the measurement can look like a change in the system.
+
+## Put cheap feedback first
+
+Type errors, formatting problems, invalid configuration, and failing unit tests should be discovered before an expensive native build. A developer should be able to get most of that feedback locally and see the same checks in the pull request.
+
+The workflow can be expressed in a few stages:
+
+```text
+Pull request
+  ├─ type and configuration checks
+  ├─ focused automated tests
+  └─ code review
+         ↓
+Environment-specific native build
+         ↓
+Installation and critical-flow checks
+         ↓
+Distribution, release record, and observation
+```
+
+Parallel checks help when they do independent work. They help less if they compete for a constrained resource or each install the same dependency set without an effective cache. Measure the complete path before optimizing an individual job.
+
+## Make the environment explicit
+
+An application binary should be traceable to a profile and a source revision. Production, internal testing, and local development need clear configuration boundaries. A successful compilation with the wrong service URL is still the wrong release.
+
+I want the build process to make those differences visible rather than relying on an engineer’s local environment. Configuration should also be validated early enough that missing values fail clearly.
+
+Expo’s build service supports native binary creation and build-profile configuration. It provides useful infrastructure, while the application team remains responsible for deciding what each environment means. [Expo Build documentation](https://docs.expo.dev/build/introduction/).
+
+## Treat distribution as part of completion
+
+A completed build job is evidence that a binary was produced. It is not evidence that the intended audience can install it, that signing is correct, or that the important product flows work on a device.
+
+For a representative release, verify installation, startup, authentication where applicable, network transitions, and the specific flow changed by the release. Add platform-specific checks when permissions or native integrations are involved. The release record should point to what was actually checked.
+
+The checks should be proportional. A copy change does not need the same device exercise as a change to video permissions or the native dependency graph. Both need a clear description of the affected behavior.
+
+## Separate binary releases from updates
+
+An over-the-air update and a native binary are different artifacts with compatibility constraints. An update strategy needs an explicit relationship between the code being published and the installed runtime that can execute it.
+
+Use the platform’s runtime and deployment model deliberately. Verify the target before publishing and practice how to stop or recover a problematic rollout. A fast update mechanism is useful only if the team understands where it can safely apply. [Expo update deployment guide](https://docs.expo.dev/eas-update/deployment/).
+
+## Watch the result after shipping
+
+Build speed and application reliability are separate measurements. During my time at Zealthy, I also led improvements that reduced crashes by 34%. That result should not be folded into the deployment-time metric or rewritten as a crash-free session rate.
+
+After a release, connect application health to the version people are actually using. Investigate whether a change affected a particular platform, operating-system version, or product flow. Useful monitoring should help narrow the next action instead of merely announcing that something failed.
+
+## Keep recovery ordinary
+
+A release process is easier to trust when recovery is a documented, practiced action. Keep the last known-good version identifiable, preserve the relevant configuration, and make the difference between reverting source and changing the deployed artifact clear.
+
+The 60% improvement matters because it shortened the delivery loop. The lasting engineering value is a process that gives the team quicker feedback and a clearer account of what reached users.

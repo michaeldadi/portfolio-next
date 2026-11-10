@@ -1,0 +1,63 @@
+---
+title: 'A patient app, from zero to web parity.'
+description: 'Built the React Native and Expo app from the ground up to feature parity with web. Created a mobile CI/CD pipeline that reduced deployment time 60%, integrated Daily SDK video visits and PHI masking, then led reliability work that reduced crashes 34%.'
+publishedAt: 2026-11-10
+order: 2
+company: Zealthy
+role: 'Senior engineer, mobile & full-stack'
+period: '2024 — 2025'
+headline: ['A patient app,', 'zero to parity', 'with web.']
+accent: sun
+technologies: ['React Native', 'Expo', 'TypeScript', 'Next.js', 'Daily SDK', 'CI/CD']
+outcome: 'Mobile deployment time reduced 60%; crashes reduced 34%.'
+---
+
+A mobile app has to become part of the product, not an isolated interface that is always catching up. At Zealthy, I built the React Native and Expo application from the ground up and brought it to feature parity with the existing web application.
+
+I joined as a Mobile & Full Stack Engineer in April 2024 and moved into a Senior Software Engineer, Mobile & Full-Stack role in January 2025. My time there ran through June 2025. The work covered product delivery, release automation, patient-provider video functionality, logging safeguards, and mobile reliability.
+
+## Starting with a working product
+
+An existing web application is useful context, but it does not remove the mobile design problem. Navigation, keyboard behavior, network transitions, operating-system permissions, and release distribution create a different set of constraints. Feature parity means supporting the same user goals while respecting those differences.
+
+I built the mobile application using React Native and Expo. The work required connecting product flows to the rest of the platform and building reusable foundations that could support continued development.
+
+## Delivery is a product capability
+
+A mobile release pipeline has several boundaries: source checks, native builds, signing, distribution, and the information a team needs to decide whether a release is healthy. Improving only one stage can leave the overall process slow or difficult to trust.
+
+I created a mobile CI/CD pipeline that reduced deployment time by **60%**. The improvement shortened the delivery loop and made release work a more effective part of product development.
+
+My approach to this kind of pipeline is to make each stage independently understandable:
+
+```text
+Reviewable change
+  → static checks and tests
+  → environment-specific build
+  → distribution and release checks
+  → observed application health
+```
+
+The accompanying [engineering note](/writing/mobile-release-pipeline/) explains the release principles in more depth using an illustrative workflow rather than a copy of an employer’s pipeline.
+
+## Connecting patients and providers
+
+I integrated on-demand patient-provider video visits using the Daily SDK. Real-time functionality has an immediate user-facing failure mode: if the connection fails or a permission is missing, the person needs to understand the next action.
+
+The broader lesson I take from video integration is to treat connection state, permissions, and recovery as part of the flow. The interface around a real-time feature needs as much care as the initial SDK integration.
+
+I also implemented PHI masking to support HIPAA-compliant workflows. This is one safeguard within a wider system of controls. A redaction function by itself does not establish the compliance of an application or organization.
+
+## Reliability and visibility
+
+In the senior role, I led mobile performance improvements that reduced crashes by **34%** while continuing to develop and maintain the patient-facing application. I also built product flows that opened new revenue streams and created unified logging for monitoring system performance and errors.
+
+These outcomes describe different dimensions of the work. The 34% figure is a crash reduction, not a crash-free session percentage. The 60% figure describes deployment time, not application startup time. Keeping those measurements distinct makes the results more useful.
+
+## Working across the team
+
+I conducted technical interviews and evaluated engineering candidates to support team growth. Alongside implementation, that work sharpened how I explain technical choices: what a candidate or teammate needs is the constraint, the alternatives, and a clear account of the tradeoff.
+
+## What I take forward
+
+The strongest mobile work connects product behavior with release and operational behavior. Reusable components help a team move, a reliable delivery process helps it ship, and useful monitoring helps it learn what happened afterwards. I enjoy owning that whole loop.

@@ -1,0 +1,69 @@
+---
+title: 'A copilot that brings evidence to human review.'
+description: 'Built RCM copilot, payer-policy intelligence, medical-necessity support, and document-extraction capabilities using Amazon Bedrock and Gemini. Bring source evidence into a workflow with human review and sensitive-data safeguards.'
+publishedAt: 2026-11-10
+order: 4
+company: Foresight RCM
+role: AI-enabled workflows
+period: '2025 — present'
+headline: ['A copilot that', 'shows its work', 'to a human.']
+accent: mint
+technologies: ['Amazon Bedrock', 'Gemini', 'Document extraction', 'Human review', 'PHI safeguards']
+outcome: 'Source-oriented policy and document support with a human reviewer in the workflow.'
+---
+
+AI-assisted operational work becomes useful when a person can inspect the evidence behind the output. In revenue-cycle workflows, a plausible explanation alone is not enough. The reviewer needs to understand which document or policy supports a statement and what still needs a decision.
+
+At Foresight RCM, I built RCM copilot, payer-policy intelligence, medical-necessity support, and document-extraction capabilities using Amazon Bedrock and Gemini, with human review and PHI safeguards.
+
+## The problem
+
+Policies and supporting documents can contain the information needed to move a workflow forward, but the relevant pieces are distributed across different sources. Extracting or summarizing that information is useful assistance. Treating an unsupported summary as an authoritative decision creates a different problem.
+
+The engineering goal is to help the reviewer locate and evaluate evidence while keeping the distinction between generated assistance and approved action visible.
+
+## My role
+
+My work sits within broader ownership of Foresight’s architecture, development, and production operations. On AI-enabled workflows, that includes connecting model capabilities to application behavior, document handling, sensitive-data safeguards, and the review experience.
+
+The public examples on this site use synthetic text and illustrative interfaces. They do not contain patient records, private payer documents, or confidential model prompts.
+
+## Design around the review
+
+The most useful way to explain the workflow is through its responsibilities:
+
+```text
+Supporting document or policy
+  → extraction and relevant context
+  → assisted summary
+  → source inspection and human review
+  → approved next action
+```
+
+The reviewer should be able to distinguish extracted source text from a model’s interpretation. A missing source, an ambiguous requirement, or an incomplete document should remain visible rather than being smoothed into a confident answer.
+
+That makes the application interface part of the reliability work. Labels, source links, review states, and editable output all affect how a person interprets the assistance.
+
+## Sensitive-data boundaries
+
+Sensitive-data safeguards are a system-design concern. Each workflow needs a clear account of which information it uses, which service receives it, and how that boundary is validated.
+
+I approach this as a system-design concern: decide what information a workflow needs, which service may receive it, how access is controlled, and which details should remain out of operational logs. Those decisions require validation at the relevant application and provider boundaries.
+
+The companion [logging article](/writing/logging-sensitive-data/) discusses a narrower engineering problem: preventing accidental sensitive-data exposure in application logs. It intentionally does not treat redaction as a substitute for the rest of a system’s controls.
+
+## Failure modes worth preserving
+
+An extracted field can be incomplete. A policy can be inapplicable to the particular workflow. A generated statement can overreach its source. A model request can fail entirely.
+
+A useful interface makes room for those outcomes. It should let a reviewer see uncertainty and continue the task without pretending that a successful model response established the correctness of the underlying decision.
+
+## What the work demonstrates
+
+This work brings model integration into a product with operational constraints. The important capability is connecting extraction and assistance to a reviewable workflow, rather than presenting model output in isolation.
+
+The human review is a central part of that design. A generated summary helps a person inspect the evidence and decide the next action.
+
+## What I take forward
+
+The pattern transfers to other domains where a person is accountable for an action. Keep source evidence close to the output, make uncertainty legible, and design the human decision as a first-class part of the product.

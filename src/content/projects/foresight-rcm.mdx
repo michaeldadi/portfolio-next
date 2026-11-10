@@ -1,0 +1,70 @@
+---
+title: 'Revenue-cycle workflows, connected end to end.'
+description: 'Lead architecture, development, and production operations for a TypeScript/Next.js revenue-cycle platform on AWS. Connect eligibility, coding, claims, remittances, denials, appeals, payments, and prior authorization with tenant isolation, authorization, audit logging, and healthcare integrations.'
+publishedAt: 2026-11-10
+order: 1
+company: Foresight RCM
+role: Founding engineer
+period: '2025 — present'
+headline: ['A revenue cycle', 'connected', 'end to end.']
+accent: cobalt
+technologies: ['TypeScript', 'Next.js', 'AWS', 'Aurora', 'Lambda', 'Step Functions', 'SQS', 'CDK']
+outcome: 'Eligibility, claims, remittances, denials, appeals, and prior authorization in one platform.'
+---
+
+Revenue-cycle work crosses a surprising number of boundaries. A product can prepare a claim correctly and still leave a billing team with a reconciliation problem, a missing acknowledgement, or a payer-specific exception. The useful unit of work is the whole lifecycle: what happened, what evidence supports it, and what someone should do next.
+
+At Foresight RCM, I lead architecture, development, and production operations for a revenue cycle management and electronic prior authorization platform. My work connects a TypeScript and Next.js product with AWS infrastructure, healthcare interfaces, and the operational workflows around them.
+
+## The problem
+
+A billing workflow is not a single API call. Eligibility checks, coding, claim scrubbing, submission, acknowledgements, remittances, payments, denials, and appeals each produce different forms of evidence. Prior authorization introduces another set of requirements, documents, and decisions.
+
+The product challenge is to make those steps understandable together. An operator needs to distinguish a submitted claim from an accepted claim, a remittance from a payment, and an automated suggestion from a decision that still requires review. Those distinctions affect both the interface and the underlying state model.
+
+## My role
+
+I own architecture through delivery and production operations. That includes application development, AWS infrastructure, integrations, deployment, observability, incident response, and vendor activation. I also work on the security boundaries that make a multi-tenant product operable: tenant isolation, role- and attribute-based authorization, encryption, and audit logging.
+
+This is founding-engineer work in the practical sense. The implementation and the operating process have to develop together. A workflow is only useful if the team can understand and recover it when an integration behaves differently from the happy path.
+
+## Connecting the system
+
+The core stack combines TypeScript and Next.js with Aurora, Lambda, Step Functions, SQS, and infrastructure expressed through CDK. These tools support different responsibilities: a relational model for durable application state, application and integration services, orchestration, asynchronous work, and repeatable infrastructure changes.
+
+Across this work, I delivered FHIR R4, HL7v2/MLLP, and X12 integrations involving Healthie, eClinicalWorks, Claim.MD, Stedi, and DoseSpot. The important engineering work sits at their boundaries: mapping external identifiers, interpreting different statuses, and carrying enough context forward for the next step.
+
+The workflow view is straightforward even when its implementation is not:
+
+```text
+Source information
+  → eligibility and preparation
+  → coding and claim checks
+  → submission and acknowledgements
+  → remittance and payment reconciliation
+  → denial, appeal, or other follow-up
+
+Supporting controls: authorization, audit history, observability
+```
+
+Each integration has its own activation and operating requirements. The workflow needs to make that readiness visible alongside its progress.
+
+## Decisions that matter
+
+**Keep external evidence distinct from internal progress.** A locally successful operation does not establish a payer outcome. Clear status names and source-linked evidence make the application easier to reason about.
+
+**Treat authorization as part of the workflow.** Who may view, edit, approve, or submit information affects the shape of a feature. Tenant boundaries and role/attribute checks belong in the application design from the beginning.
+
+**Build for the person resolving the exception.** An audit trail should answer what changed and why. Observability should help locate the failing boundary. Neither is well served by an opaque success/failure badge.
+
+**Keep infrastructure reproducible.** CDK makes the operating environment reviewable alongside the application. Deployment work remains an engineering responsibility, rather than an undocumented final step.
+
+## Delivery and operations
+
+My responsibilities include deploying the product, responding to incidents, and working through vendor activation. That operating loop is valuable feedback: a confusing failure in production often points to a missing distinction in the product or state model.
+
+The platform work covers automated eligibility, coding, claim scrubbing, CMS-1500/837P submission, acknowledgements, ERA/835 posting, denials, appeals, payments, and prior authorization. Integration activation and operational readiness are tracked for the organizations using each pathway.
+
+## What I take forward
+
+I like systems where the user can inspect the evidence behind an action. Healthcare makes the need particularly visible, but the engineering lesson applies just as well to payments, financial operations, and any product that crosses several external systems: make progress explicit, keep the source evidence, and make recovery part of the design.

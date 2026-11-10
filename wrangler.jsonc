@@ -1,0 +1,47 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "michael-dadi-portfolio",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-11-10",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "force-trailing-slash",
+    "run_worker_first": ["/api/*"],
+  },
+  "observability": { "enabled": true },
+  "env": {
+    "preview": {
+      "name": "michael-dadi-portfolio-preview",
+      "workers_dev": true,
+      "preview_urls": false,
+      "vars": { "DEPLOY_ENV": "preview", "ALLOWED_ORIGIN": "", "REVISION": "local" },
+      "ratelimits": [
+        {
+          "name": "CONTACT_RATE_LIMITER",
+          "namespace_id": "2026111001",
+          "simple": { "limit": 10, "period": 60 },
+        },
+      ],
+    },
+    "production": {
+      "name": "michael-dadi-portfolio",
+      "workers_dev": false,
+      "preview_urls": false,
+      "vars": {
+        "DEPLOY_ENV": "production",
+        "ALLOWED_ORIGIN": "https://michaeldadi.dev",
+        "REVISION": "release",
+      },
+      "routes": [{ "pattern": "michaeldadi.dev", "custom_domain": true }],
+      "ratelimits": [
+        {
+          "name": "CONTACT_RATE_LIMITER",
+          "namespace_id": "2026111002",
+          "simple": { "limit": 10, "period": 60 },
+        },
+      ],
+    },
+  },
+}
