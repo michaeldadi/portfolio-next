@@ -57,6 +57,10 @@ Check `/api/health` returns 200; that establishes configuration readiness only. 
 
 Use `wrangler deployments list --env production` to identify versions. Roll back to the recorded known-good Worker version with the supported Wrangler rollback command, then rerun public smoke checks. Revert the source change before deploying again. DNS rollback uses the saved DNS records and is separate from application-version rollback.
 
+The initial known-good production baseline is version `2803b856-413d-461b-bcad-2977a4777a03`, source revision `2c7364f5dda96b5639881660ad3aa04ad3cc725e` (November 10, 2026). Prefer a more recent verified version when one exists. Rollback changes the live application; it was not executed during the successful initial launch. The `www` redirect uses a proxied `192.0.2.1` placeholder A record and an exact-host redirect expression, preserving request path and query.
+
+GitHub deployment and preview CI credentials created at launch expire in November 2027. Replace them in the corresponding GitHub environment secret stores before expiry and run a controlled deployment/smoke check. Keep Resend Sending keys restricted to the verified `mail.michaeldadi.dev` domain. Rotate values through provider secret stores; never put them into the repository, release artifacts, Craft, or logs.
+
 ## Monitoring and privacy
 
 Inspect Worker errors, response categories and latency, Resend delivery/bounce status, and Web Analytics field performance. The application logs no names, addresses, message bodies, tokens, or raw client IPs. Rate limiting is approximate per Cloudflare location and is not a global quota guarantee.

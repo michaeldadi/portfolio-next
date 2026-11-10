@@ -1,40 +1,34 @@
 # Release evidence — November 10, 2026
 
-## Implemented
+## Live release
 
-Fresh Astro/TypeScript/Tailwind application in the existing repository, with the approved Bold Geometric homepage, working selectors, four case studies, three complete articles, project/writing indexes, privacy page, real 404 page, RSS, sitemap, local fonts, supplied portrait, and a contact-redacted public résumé. The previous application and dependency graph have been removed from this branch; history is preserved.
+The portfolio is public at **https://michaeldadi.dev/**. [PR #1](https://github.com/michaeldadi/portfolio-next/pull/1) was merged, preserving the original Git history while replacing the prior application. The first verified production release is main revision `2c7364f5dda96b5639881660ad3aa04ad3cc725e`.
 
-The Cloudflare Worker implements bounded validation, origin checks, Turnstile verification, approximate rate limiting with HMAC-derived keys, provider idempotency, private-recipient email delivery, and configuration health. GitHub workflows provide checks, protected-preview deployment, guarded production deployment, exact-revision provenance, hosted smoke checks, and optional automatic main-branch release after account setup.
+- Cloudflare Worker `michael-dadi-portfolio` serves the custom domain. Its `workers.dev` hostname and version URLs are disabled.
+- [Production deployment and public smoke checks passed](https://github.com/michaeldadi/portfolio-next/actions/runs/42878260915). They verify exact revision, eleven public pages, security headers, canonical URLs, crawler rules, RSS, sitemap, résumé delivery, true 404s, and contact configuration readiness. The first attempt encountered initial DNS propagation; the rerun passed after resolution was established.
+- Michael submitted a real message through the production form and confirmed inbox receipt. He separately verified preview delivery. Production and preview use separate domain-restricted Resend Sending keys, Turnstile widgets, and rate-limit salts. Private contact details and secrets are not published.
+- `www` redirects to the HTTPS apex while preserving path and query; both HTTP and HTTPS requests were checked.
+- DNSSEC DS/DNSKEY records are published and a validating resolver returned the authenticated-data flag. Cloudflare Registrar manages the DS record.
+- Production Web Analytics uses one manually installed beacon. Automatic provider injection is disabled to prevent duplicate tracking; open/click tracking and receiving remain disabled in Resend.
+- The preview remains behind Worker-wide Cloudflare Access, with a service-auth policy only for the preview CI token. [Its deployment and authenticated smoke checks passed](https://github.com/michaeldadi/portfolio-next/actions/runs/42876494187); anonymous requests redirect to Access. Version URLs are disabled.
+- GitHub environment secrets and public build settings are installed. After the controlled public release and inbox confirmation, `CLOUDFLARE_DEPLOYS_ENABLED=true` was enabled for future successful main-branch checks. The workflow checks out the exact successful revision before building and deploying.
 
-## Observed local verification
+## Application and verification
 
-- ESLint and Astro/Worker type checks pass with no reported diagnostics.
-- 24 handler tests pass.
-- Browser suite: 37 passed, 3 intentionally skipped responsive-loop duplicates. Chromium, Firefox, WebKit, and mobile WebKit cover navigation, selectors, menu controls, contact success/retry fixtures, no-JavaScript content, real 404 routing, security headers, crawler rules, and automated WCAG checks on three representative pages.
-- Responsive checks cover 360, 390, 768, 834, 1024, and 1440 pixels without page overflow.
-- Build checks validate 12 HTML outputs, internal links, public résumé contact removal, and compressed asset budgets. First-party JavaScript is approximately 2.5 KB Brotli; CSS is approximately 7.2 KB Brotli.
-- Public résumé page layout and representative desktop/mobile pages were visually reviewed. Product diagrams are illustrative and contain synthetic examples.
-- Browser contact providers are explicit test fixtures. No real message has been sent or delivered by this implementation.
+Fresh Astro/TypeScript/Tailwind application follows the approved AIDesigner Portfolio variant A, Bold Geometric. It includes the supplied portrait, functioning focus/tooling selectors, responsive navigation, four complete case studies, three engineering articles, indexes, privacy, RSS, sitemap, and a contact-redacted résumé. The mobile hero caption and GitHub badge occupy separate layout rows below the desktop breakpoint; a regression check covers 360–1440px.
 
-Mobile Lighthouse measurements completed: three runs each of the homepage, Zealthy case study, and PostgreSQL article. Every page has median scores of 100 performance, 100 accessibility, and 100 best practices. Preview SEO scores are 69/66/66 because indexing is intentionally disabled; the only failing scored SEO audit is the expected crawler exclusion. These local measurements are not field performance. Hosted CI and the final source revision are tracked in [draft PR #1](https://github.com/michaeldadi/portfolio-next/pull/1).
+[Main-branch CI passed](https://github.com/michaeldadi/portfolio-next/actions/runs/42875995661): formatting, lint, Astro/Worker types, 24 handler tests, 37 browser checks across Chromium/Firefox/WebKit/mobile WebKit, three intentional responsive duplicates skipped, automated accessibility checks on representative pages, twelve HTML outputs, internal links, PDF privacy, and asset budgets. First-party JavaScript is 2,497 bytes and CSS is 7,132 bytes Brotli.
 
-A separate local production-mode build verified indexable metadata, crawler rules, and a valid Cloudflare Worker/static-assets dry run. The deployment guard correctly refused to publish without a real Turnstile key. This is a local release rehearsal, not a deployment.
+Three mobile Lighthouse runs per representative page produced median 100 performance, 100 accessibility, and 100 best-practices scores. Preview SEO is intentionally lower because indexing is disabled. A separate local production-build rehearsal scored 100 in all four categories on sampled pages. These are lab measurements, not field-performance claims.
 
-## Hosting checkpoint
+Browser contact fixtures remain distinct from the real delivery checks. Turnstile rejected the automated browser with challenge failure `300030`; Michael completed the human verification himself. No verification bypass or test key is used in production.
 
-Michael connected the intended personal Cloudflare account, activated Zero Trust Free, created his Resend account, and personally completed registration of **michaeldadi.dev**. Registration is active through November 10, 2027 with auto-renewal enabled. The approved canonical URL is `https://michaeldadi.dev`; application URLs, metadata, public résumé, social card, route configuration, and smoke expectations now use it.
+## Domain and recovery
 
-The earlier `.com` planning value is superseded. Michael explicitly excluded interaction with his suspended personal AWS account and recovery of that domain for this project. No AWS account or registrar changes were made.
+Michael personally registered `michaeldadi.dev` through Cloudflare on November 10, 2026. Registration is active through November 10, 2027 with auto-renewal enabled. The earlier `.com` planning value is superseded. Michael excluded interaction with the suspended personal AWS account and recovery of that domain; no AWS account or registrar changes were made for this project.
 
-- Preview: `https://michael-dadi-portfolio-preview.michaeldadi.workers.dev/`, protected by Cloudflare Access for all traffic. An anonymous request redirects to the Access login; the authenticated homepage rendered successfully. Version URLs are disabled.
-- Preview has all five server-side secret bindings. Its managed Turnstile widget is restricted to the preview hostname. Its Resend key has Sending access restricted to `mail.michaeldadi.dev`.
-- Resend verified `mail.michaeldadi.dev`. Its generated DKIM TXT and two Forge CNAME records resolve at the authoritative nameserver. A monitoring-only DMARC policy is present; receiving and click/open tracking remain disabled.
-- A separate production Worker has been uploaded **without routes or Worker/version URLs** for private configuration. It has separate Turnstile and rate-limit secrets and a separate domain-scoped Resend Sending key. This private upload is not a public launch.
-- Production Web Analytics is configured for manual snippet installation, avoiding duplicate injection. Production and preview GitHub environments exist; deployment credentials and the preview Access service token are still pending.
-- The live Turnstile widget loaded but rejected the automated browser with challenge failure `300030`. This is not evidence of a hostname/configuration failure or of successful human verification. A human form submission and actual private-inbox receipt remain required.
+The initial registered zone was empty. Dedicated Resend DKIM/Forge records and a monitoring-only DMARC policy were added before website cutover; the provider verified the sending domain. The `www` record is a proxied documentation-address placeholder used only for the zone redirect. The apex Worker custom domain is managed by Cloudflare.
 
-Remaining work: complete GitHub deployment and preview service credentials, verify the configured preview, obtain a successful human contact submission, then publish the tested main revision on the production custom domain with TLS, redirect, DNSSEC, smoke and recovery evidence. No real message delivery or public production launch is claimed at this checkpoint.
+The first verified production recovery baseline is Worker version `2803b856-413d-461b-bcad-2977a4777a03` at source revision `2c7364f5dda96b5639881660ad3aa04ad3cc725e`. Later documentation-only releases may have a newer live revision; consult `/api/health`, `/release.json`, GitHub deployment runs, and `wrangler deployments list --env production` for current state. Release artifacts and the DNS cutover snapshot were recorded separately. No live rollback was performed because it would change the functioning public deployment.
 
-The previous Vercel deployment is retained. The replacement includes a new Vercel Git-deployment disable setting to prevent legacy automatic deployments of this branch. Production auto-release remains disabled until `CLOUDFLARE_DEPLOYS_ENABLED=true` is deliberately configured after initial setup.
-
-The deployment runbook is [operations.md](operations.md). These external gates are not equivalent to missing application code, and local success is not evidence of hosted delivery.
+The previous Vercel deployment is retained as a historical recovery reference; new Vercel Git deployments are disabled. Operational commands, secret handling, deployment and recovery procedures are in [operations.md](operations.md).
