@@ -31,10 +31,10 @@
       "preview_urls": false,
       "vars": {
         "DEPLOY_ENV": "production",
-        "ALLOWED_ORIGIN": "https://michaeldadi.com",
+        "ALLOWED_ORIGIN": "https://michaeldadi.dev",
         "REVISION": "release",
       },
-      "routes": [{ "pattern": "michaeldadi.com", "custom_domain": true }],
+      "routes": [{ "pattern": "michaeldadi.dev", "custom_domain": true }],
       "ratelimits": [
         {
           "name": "CONTACT_RATE_LIMITER",

@@ -5,13 +5,13 @@
 | Environment | Worker                         | Indexing                                                   | Email configuration                          |
 | ----------- | ------------------------------ | ---------------------------------------------------------- | -------------------------------------------- |
 | Preview     | michael-dadi-portfolio-preview | noindex headers/meta, disallowed robots, Cloudflare Access | Isolated provider/verification configuration |
-| Production  | michael-dadi-portfolio         | canonical michaeldadi.com                                  | Real verified sender and private recipient   |
+| Production  | michael-dadi-portfolio         | canonical michaeldadi.dev                                  | Real verified sender and private recipient   |
 
-Use the account's `workers.dev` address for preview and attach `michaeldadi.com` only for the production cutover. Configure Cloudflare Access for preview before sharing its URL. Disable additional unprotected preview/version URLs. Keep deployment credentials in provider/GitHub secret stores.
+Use the account's `workers.dev` address for preview and attach `michaeldadi.dev` only for the production cutover. Configure Cloudflare Access for preview before sharing its URL. Disable additional unprotected preview/version URLs. Keep deployment credentials in provider/GitHub secret stores.
 
 ## One-time account setup
 
-1. Confirm the Cloudflare account and an active zone for the domain. Export existing DNS records and inspect DNSSEC before changes. The planning session could not establish authoritative DNS because its resolver returned SERVFAIL.
+1. Confirm the Cloudflare account and an active zone for the domain. Export existing DNS records and inspect DNSSEC before changes. The registered `michaeldadi.dev` zone is active in the personal Cloudflare account. The initial zone was empty before adding the dedicated sending records.
 2. Create the preview Worker, then configure its exact HTTPS origin in `ALLOWED_ORIGIN`.
 3. Create separate Turnstile widgets for preview and production, restricted to their hostnames. Both use action `portfolio_contact`.
 4. Verify a sending subdomain in Resend. Preserve existing mailbox MX/SPF/DKIM records; use the provider's exact records for the sending subdomain.
@@ -22,9 +22,9 @@ Use the account's `workers.dev` address for preview and attach `michaeldadi.com`
 9. The newly authored `vercel.json` disables the legacy Vercel Git deployment integration for this replacement. Retain the previous deployment as a recovery reference.
 10. After the first controlled production release and delivery check, set repository variable `CLOUDFLARE_DEPLOYS_ENABLED=true` to enable automatic production releases after successful `Portfolio checks` runs on main. Leave it unset during initial account and DNS setup.
 
-The configured domain remains provisional until ownership is established; see the correction in `release-status.md`. The first staging upload used a temporary configuration with both `workers_dev` and `preview_urls` disabled so Access could be prepared before any preview URL became reachable. The checked-in preview configuration enables its Worker hostname for a completed protected release, while version URLs remain explicitly disabled in both environments.
+Michael registered `michaeldadi.dev` on November 10, 2026; it is the approved canonical domain. Do not interact with the suspended personal AWS account or attempt recovery of the superseded `.com` domain for this project. The first staging upload used a temporary configuration with both `workers_dev` and `preview_urls` disabled so Access could be prepared before any preview URL became reachable. The checked-in preview configuration enables its Worker hostname for a completed protected release, while version URLs remain explicitly disabled in both environments.
 
-Zero Trust Free onboarding currently requests billing details and overage authorization. Account owners complete that checkout and provider terms themselves. A local preview and an unrouted Worker remain available if that enrollment is deferred; neither is a protected hosted preview.
+Michael completed Zero Trust Free onboarding himself. The hosted preview requires Cloudflare Access for all traffic; version URLs remain disabled. Web Analytics uses manual snippet installation so Cloudflare does not inject a duplicate beacon.
 
 ## Release commands
 

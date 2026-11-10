@@ -81,7 +81,7 @@ test('every published route loads directly', async ({ page }) => {
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      `https://michaeldadi.com${route}`,
+      `https://michaeldadi.dev${route}`,
     );
   }
 });
@@ -199,6 +199,18 @@ test('responsive layout has no page overflow and records review screenshots', as
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
       `${width}px`,
     ).toBe(true);
+    const github = await page.locator('[data-aid="hero-github"]').boundingBox();
+    const caption = await page.locator('[data-aid="hero-caption"]').boundingBox();
+    expect(github).not.toBeNull();
+    expect(caption).not.toBeNull();
+    if (github && caption) {
+      const separated =
+        caption.y >= github.y + github.height ||
+        github.y >= caption.y + caption.height ||
+        caption.x >= github.x + github.width ||
+        github.x >= caption.x + caption.width;
+      expect(separated, `Hero caption and GitHub badge must not overlap at ${width}px`).toBe(true);
+    }
     if ([390, 834, 1440].includes(width))
       await page.screenshot({ path: testInfo.outputPath(`home-${width}.png`), fullPage: true });
   }

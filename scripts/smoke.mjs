@@ -45,7 +45,7 @@ for (const path of release.routes.filter((route) => route !== '/404')) {
   }
   const html = await response.text();
   assert.match(html, /<html lang="en"/);
-  assert.match(html, /rel="canonical" href="https:\/\/michaeldadi\.com\//);
+  assert.match(html, /rel="canonical" href="https:\/\/michaeldadi\.dev\//);
 }
 const health = await (await get('/api/health')).json();
 assert.equal(health.status, 'ready', 'Contact configuration is not ready');

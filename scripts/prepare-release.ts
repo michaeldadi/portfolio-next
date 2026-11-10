@@ -80,7 +80,7 @@ await writeFile(
 await writeFile(
   'dist/robots.txt',
   production
-    ? 'User-agent: *\nAllow: /\nSitemap: https://michaeldadi.com/sitemap-index.xml\n'
+    ? 'User-agent: *\nAllow: /\nSitemap: https://michaeldadi.dev/sitemap-index.xml\n'
     : 'User-agent: *\nDisallow: /\n',
 );
 

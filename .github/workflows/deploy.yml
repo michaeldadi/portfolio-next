@@ -72,7 +72,7 @@ jobs:
         run: pnpm deploy:production
       - name: Verify deployed routes and contact readiness
         env:
-          TEST_ORIGIN: ${{ env.DEPLOY_ENV == 'production' && 'https://michaeldadi.com' || vars.PREVIEW_ORIGIN }}
+          TEST_ORIGIN: ${{ env.DEPLOY_ENV == 'production' && 'https://michaeldadi.dev' || vars.PREVIEW_ORIGIN }}
           CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
           CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: node scripts/smoke.mjs

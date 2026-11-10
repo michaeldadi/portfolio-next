@@ -1,7 +1,7 @@
 export const site = {
   name: 'Michael Dadi',
   title: 'Michael Dadi — Senior Software Engineer',
-  url: 'https://michaeldadi.com',
+  url: 'https://michaeldadi.dev',
   description:
     'Senior software engineer and founding engineer. Web, mobile, cloud infrastructure, and the production work that connects them.',
   github: 'https://github.com/michaeldadi',

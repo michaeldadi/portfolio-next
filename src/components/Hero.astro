@@ -275,9 +275,6 @@ const qr = await QRCode.toString(site.github, {
       </div>
     </div>
 
-    <p class="absolute bottom-3 left-6 font-mono text-[10px] text-white/70">
-      Illustrative product interfaces · synthetic data
-    </p>
     <!-- Portrait card -->
     <div
       data-aid="hero-portrait"
@@ -295,10 +292,17 @@ const qr = await QRCode.toString(site.github, {
     <!-- QR chip -->
     <a
       href="https://github.com/michaeldadi"
-      class="md:absolute md:right-6 md:bottom-6 mx-auto mb-6 md:mb-0 w-max bg-ink rounded-lg p-2 flex items-center gap-2 hover:bg-black"
+      data-aid="hero-github"
+      class="lg:absolute lg:right-6 lg:bottom-6 mx-auto w-max bg-ink rounded-lg p-2 flex items-center gap-2 hover:bg-black"
     >
       <span aria-hidden="true" set:html={qr} />
       <span class="font-mono text-[11px] text-white">github.com/michaeldadi</span>
     </a>
+    <p
+      data-aid="hero-caption"
+      class="relative mt-6 px-6 pb-6 text-center lg:absolute lg:bottom-3 lg:left-6 lg:mt-0 lg:p-0 lg:text-left font-mono text-[10px] text-white/70"
+    >
+      Illustrative product interfaces · synthetic data
+    </p>
   </div>
 </section>
