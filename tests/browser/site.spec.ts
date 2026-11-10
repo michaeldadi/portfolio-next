@@ -91,14 +91,66 @@ test('mobile menu supports selection and Escape', async ({ page }) => {
   await page.goto('/');
   const menu = page.locator('.mobile-menu');
   const toggle = menu.locator('summary');
+  await expect(page.locator('header .header-github')).toBeHidden();
   await toggle.click();
   await expect(menu).toHaveAttribute('open', '');
+  const header = (await page.locator('header').boundingBox())!;
+  const panel = (await menu.locator('.mobile-menu-panel').boundingBox())!;
+  expect(panel.y).toBeCloseTo(header.y + header.height, 0);
   await menu.getByRole('link', { name: 'Work', exact: true }).click();
   await expect(menu).not.toHaveAttribute('open', '');
   await toggle.click();
   await toggle.press('Escape');
   await expect(menu).not.toHaveAttribute('open', '');
   await expect(toggle).toBeFocused();
+});
+
+test('header respects notched portrait and landscape safe areas', async ({
+  page,
+  browserName,
+}, testInfo) => {
+  test.skip(browserName !== 'chromium', 'Nonzero safe-area emulation uses Chromium CDP');
+  const session = await page.context().newCDPSession(page);
+  for (const scenario of [
+    { name: 'compact', width: 375, height: 667, top: 0, left: 0, right: 0, bottom: 0 },
+    { name: 'notch', width: 390, height: 844, top: 47, left: 0, right: 0, bottom: 34 },
+    { name: 'island', width: 393, height: 852, top: 59, left: 0, right: 0, bottom: 34 },
+    { name: 'landscape', width: 852, height: 393, top: 0, left: 59, right: 59, bottom: 21 },
+  ]) {
+    await page.setViewportSize({ width: scenario.width, height: scenario.height });
+    await session.send('Emulation.setSafeAreaInsetsOverride', {
+      insets: {
+        top: scenario.top,
+        left: scenario.left,
+        right: scenario.right,
+        bottom: scenario.bottom,
+      },
+    });
+    await page.goto('/#work');
+    await page.evaluate(() => document.fonts.ready);
+    const header = page.locator('header');
+    const bounds = (await header.boundingBox())!;
+    expect(bounds.y).toBe(0);
+    expect(bounds.height).toBe(61 + scenario.top);
+    await expect(header).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    expect((await page.locator('#work h2').boundingBox())!.y).toBeGreaterThanOrEqual(bounds.height);
+    for (const control of await header.locator('a:visible, summary:visible').all()) {
+      const box = (await control.boundingBox())!;
+      expect(box.y).toBeGreaterThanOrEqual(scenario.top);
+      expect(box.x).toBeGreaterThanOrEqual(scenario.left);
+      expect(box.x + box.width).toBeLessThanOrEqual(scenario.width - scenario.right);
+    }
+    if (scenario.width < 768) {
+      await page.locator('.mobile-menu summary').click();
+      const panel = (await page.locator('.mobile-menu-panel').boundingBox())!;
+      expect(panel.y).toBeGreaterThanOrEqual(bounds.height - 1);
+      expect(panel.y + panel.height).toBeLessThanOrEqual(scenario.height);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await page.screenshot({ path: testInfo.outputPath(`header-${scenario.name}.png`) });
+  }
 });
 
 test('form validates and explains missing configuration without fake success', async ({ page }) => {
