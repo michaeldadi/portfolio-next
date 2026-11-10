@@ -9,8 +9,8 @@ const links = [
 ];
 ---
 
-<header data-aid="nav" class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-hair">
-  <div class="mx-auto w-full max-w-[1280px] px-5 md:px-8 h-[60px] flex items-center justify-between">
+<header data-aid="nav" class="site-header sticky top-0 z-40 border-b border-hair">
+  <div class="header-inner mx-auto w-full max-w-[1280px] flex items-center justify-between">
     <a href="/" class="flex items-center gap-3" aria-label="Michael Dadi home">
       <span class="w-9 h-9 rounded-md bg-cobalt text-white display text-[15px] flex items-center justify-center tracking-normal">
         MD
@@ -28,10 +28,7 @@ const links = [
       ))}
     </nav>
     <div class="flex items-center gap-2">
-      <a
-        href={site.github}
-        class="pill hidden md:inline-flex bg-[#f1f1f2] text-ink hover:bg-[#e6e6e8]"
-      >
+      <a href={site.github} class="pill header-github bg-[#f1f1f2] text-ink hover:bg-[#e6e6e8]">
         GitHub
       </a>
       <a
