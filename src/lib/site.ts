@@ -6,7 +6,7 @@ export const site = {
     'Senior software engineer and founding engineer. Web, mobile, cloud infrastructure, and the production work that connects them.',
   github: 'https://github.com/michaeldadi',
   linkedin: 'https://www.linkedin.com/in/michael-dadi-a56465121/',
-  updated: '2026-11-10',
+  updated: '2026-11-24',
 };
 
 export function formatDate(date: Date | string) {
