@@ -247,11 +247,14 @@ const qr = await QRCode.toString(site.github, {
       <div aria-hidden="true" class="ui-card p-4 min-h-[200px]">
         <div class="flex justify-between text-[10px] text-white/50 mb-3">
           <span>#217 lib/logger.ts</span>
-          <span class="text-mint">+5 −1</span>
+          <span class="flex gap-1">
+            <span class="text-mint">+4</span>
+            <span class="text-[#ff9a9a]">−1</span>
+          </span>
         </div>
         <div class="scroll-x">
           <pre class="text-[11px] leading-[1.6] min-w-[250px]"><span class="text-white/40">  export function logVisit(v) &#123;</span>
-<span class="bg-coral/25 text-coral">-   logger.info('visit', v)</span>
+<span class="bg-red-500/20 text-[#ff9a9a]">-   logger.info('visit', v)</span>
 <span class="bg-mint/25 text-mint">+   const safe = maskPhi(v, &#123;</span>
 <span class="bg-mint/25 text-mint">+     fields: ['name','dob','mrn'],</span>
 <span class="bg-mint/25 text-mint">+   &#125;)</span>
