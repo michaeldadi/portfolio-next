@@ -18,9 +18,17 @@ jobs:
       WRANGLER_SEND_METRICS: 'false'
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
+      - name: Check the sitewide update date
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/check-site-updated.mjs "$BASE_SHA" "$HEAD_SHA"
       - uses: pnpm/action-setup@v4
       - run: sudo apt-get update && sudo apt-get install -y poppler-utils libc++1
       - run: pnpm install --frozen-lockfile

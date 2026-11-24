@@ -40,6 +40,8 @@ The build checks all launch routes and internal links, verifies public PDF text 
 
 Published projects and articles are typed Astro content collections. A `draft: true` entry is omitted from pages, indexes, RSS, and sitemaps. Add content through those collections and keep stable slugs. The site profile, approved experience component, and tooling panels supply the remaining public copy.
 
+For changes to site source, public assets, or Astro configuration, refresh `site.updated` in `src/lib/site.ts` to the date of the change in New York. CI accepts the existing date for another change on the same day. Article, project, and privacy dates describe changes to their own content.
+
 Private editorial research and evidence belong in Craft. Publish only reviewed MDX and approved assets to this public repository. The website has no runtime Craft connection. The public résumé removes private contact text and annotations from the user-supplied original; the original is not stored here.
 
 ## Hosting
