@@ -37,4 +37,6 @@ if (!validDate || site.updated < changedOn || site.updated > headDate) {
   process.exit(1);
 }
 
-console.log(`The shared footer date (${site.updated}) covers the latest site change (${changedOn}).`);
+console.log(
+  `The shared footer date (${site.updated}) covers the latest site change (${changedOn}).`,
+);
